@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id          Int           @id @default(autoincrement())
+  name        String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  deletedAt   DateTime?
+  Products    Products[]
+  Customers   Customers[]
+  ProductsLog ProductsLog[]
+
+  @@map("users")
+}
+
+model Customers {
+  id          Int           @id @default(autoincrement())
+  user        Users         @relation(fields: [usersId], references: [id])
+  usersId     Int
+  name        String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  deletedAt   DateTime?
+  ProductsLog ProductsLog[]
+
+  @@map("customers")
+}
+
+model Products {
+  id          Int           @id @default(autoincrement())
+  user        Users         @relation(fields: [usersId], references: [id])
+  usersId     Int
+  type        String
+  title       String
+  method      String
+  inventory   Int
+  price       Float
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  deletedAt   DateTime?
+  ProductsLog ProductsLog[]
+
+  @@map("products")
+}
+
+model ProductsLog {
+  id          Int        @id @default(autoincrement())
+  product     Products   @relation(fields: [productsId], references: [id])
+  productsId  Int
+  quantity    Int
+  price       Float
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
+  user        Users?     @relation(fields: [usersId], references: [id])
+  usersId     Int?
+  customer    Customers? @relation(fields: [customersId], references: [id])
+  customersId Int?
+  returningAt DateTime?
+  returnedAt  DateTime?
+
+  @@map("productsLog")
+}
