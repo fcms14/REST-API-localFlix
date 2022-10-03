@@ -1,6 +1,7 @@
 # REST-API-localFlix
 Backend for a Local Store for Renting and Selling Products
 
+* git clone https://github.com/fcms14/REST-API-localFlix.git
 * npm install
 * copy .env.example to your local .env
 * npm run dev
