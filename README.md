@@ -14,4 +14,7 @@ Backend for a Local Store for Renting and Selling Products
 > Use "company" or "customer" to get authorize access
 
 ## Time Spent on this project
-* https://wakatime.com/@b53932b8-f8ff-46a1-84c2-973b79bd3311/projects/cibcjzpipo?start=2022-09-26&end=2022-10-02
+#### Initial
+* https://wakatime.com/@b53932b8-f8ff-46a1-84c2-973b79bd3311/projects/cibcjzpipo?start=2022-09-26&end=2022-10-02 
+#### Deploy and Unit Tests
+* https://wakatime.com/@b53932b8-f8ff-46a1-84c2-973b79bd3311/projects/hbrhxaepjy?start=2022-09-27&end=2022-10-03
