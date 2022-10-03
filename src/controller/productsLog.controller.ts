@@ -7,21 +7,20 @@ import { createProductsLogService, returninProductsLogService, listProductsLogSe
 
 export async function createProductsLog(req: Request, res: Response) {
     const productsId  = parseInt(req.body.productsId);
-    const customersId = parseInt(req.body.customersId);
-    const usersId     = parseInt(req.body.usersId);
     const method      = req.body.method?.toString();
-
     const quantity    = parseInt(req.body.quantity);
     const returningAt = req.body.returningAt ? new Date(req.body.returningAt) : null;
+    const customersId = parseInt(req.body.customersId);
+    const usersId     = parseInt(req.body.usersId);
 
-    const allowedTransactions = process.env.ALLOWED_TRANSACTIONS || [''];
+    const allowedTransactions = process.env.ALLOWED_TRANSACTIONS || ['renting', 'selling'];
 
     if (!productsId) {
 
         return res.status(406).send("Product ID can't be empty");
     }
 
-    if (!allowedTransactions.includes(method)) {
+    if (!method || !allowedTransactions.includes(method)) {
 
         return res.status(406).send(`Only the following methods are allowed: ${allowedTransactions}`);
     }
@@ -145,7 +144,7 @@ export async function listProductsLog(req: Request, res: Response) {
     const type          = req.query.type?.toString();
     const title         = req.query.title?.toString();
 
-    const allowedTransactions = process.env.ALLOWED_TRANSACTIONS || [''];
+    const allowedTransactions = process.env.ALLOWED_TRANSACTIONS || ['renting', 'selling'];
 
     if (method && !allowedTransactions.includes(method)) {
 

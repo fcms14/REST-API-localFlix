@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/controller/customer.controller.ts</title>
+    <title>Code coverage report for src/controller/product.controller.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/controller</a> customer.controller.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/controller</a> product.controller.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.42% </span>
+                <span class="strong">57.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>66/152</span>
+                <span class='fraction'>120/208</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">83.67% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>41/49</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.42% </span>
+                <span class="strong">57.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>66/152</span>
+                <span class='fraction'>120/208</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -215,12 +215,70 @@
 <a name='L150'></a><a href='#L150'>150</a>
 <a name='L151'></a><a href='#L151'>151</a>
 <a name='L152'></a><a href='#L152'>152</a>
-<a name='L153'></a><a href='#L153'>153</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -263,51 +321,105 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -331,7 +443,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -370,20 +482,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
 import log from "../utils/logger";
 import { selectUserService } from '../service/user.service';
-import { createCustomerService, deleteCustomerService, updateCustomerService, selectCustomerService, listCustomerService } from '../service/customer.service';
+import { createProductService, deleteProductService, updateProductService, selectProductService, listProductService } from '../service/product.service';
 &nbsp;
-export <span class="fstat-no" title="function not covered" >async function listCustomer(req: Request, res: Response) {</span>
-<span class="cstat-no" title="statement not covered" >    const name = req.query.name?.toString();</span>
-<span class="cstat-no" title="statement not covered" >    </span>
+export <span class="fstat-no" title="function not covered" >async function listProduct(req: Request, res: Response) {</span>
+<span class="cstat-no" title="statement not covered" >    const type = req.query.type?.toString();</span>
+<span class="cstat-no" title="statement not covered" >    const title = req.query.title?.toString();</span>
+<span class="cstat-no" title="statement not covered" >    const method = req.query.method?.toString();</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        const customers = await listCustomerService(name);</span>
+<span class="cstat-no" title="statement not covered" >        const products = await listProductService(type, title, method);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        if (!customers || !customers.length) {</span>
+<span class="cstat-no" title="statement not covered" >        if (!products || !products.length) {</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Users not found");</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Products not found");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ customers });</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ products });</span>
 <span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
 <span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -391,42 +505,132 @@ export <span class="fstat-no" title="function not covered" >async function listC
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
-export async function selectCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
+export async function selectProduct(req: Request, res: Response) {
+    const productId = parseInt(req.params.productId);
 &nbsp;
-    if (!customerId) {
+    if (!productId) {
 &nbsp;
-        return res.status(406).send("Customer ID can't be empty");
+        return res.status(406).send("Product ID can't be empty");
     }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        const customer = await selectCustomerService(customerId);</span>
-<span class="cstat-no" title="statement not covered" >        if (!customer) {</span>
+<span class="cstat-no" title="statement not covered" >        const product = await selectProductService(productId);</span>
+<span class="cstat-no" title="statement not covered" >        if (!product) {</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Customer not found");</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Product not found");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ customer });</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ product });</span>
 <span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
 <span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" >        </span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 }
 &nbsp;
-export async function createCustomer(req: Request, res: Response) {
-    const name    = req.body.name?.toString();
-    const usersId = parseInt(req.body.usersId);
+export async function createProduct(req: Request, res: Response) {
+    const usersId   = parseInt(req.body.usersId);
+    const type      = req.body.type?.toString();
+    const method    = req.body.method?.toString();
+    const inventory = parseInt(req.body.inventory);
+    const price     = Number(req.body.price);
+    const title     = req.body.title?.toString();
 &nbsp;
-    if (!name) {
+    const allowedTypes   = process.env.ALLOWED_TYPES<span class="branch-0 cbranch-no" title="branch not covered" > || ['books', 'movies', 'series'];</span>
+    const allowedMethods = process.env.ALLOWED_METHODS<span class="branch-0 cbranch-no" title="branch not covered" > || ['renting', 'selling', 'both'];</span>
+&nbsp;
+    if (!usersId) {
+&nbsp;
+        return res.status(406).send("User ID can't be empty");
+    }
+&nbsp;
+    if (!type || !allowedTypes.includes(type)) {
+&nbsp;
+        return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
+    }
+&nbsp;
+    if (!method || !allowedMethods.includes(method)) {
+&nbsp;
+        return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
+    }
+&nbsp;
+    if (isNaN(inventory) || inventory &lt; 0) {
+&nbsp;
+        return res.status(406).send(`Inventory should be greater than or equal to 0`);
+    }
+&nbsp;
+    if (isNaN(price) || price &lt;= 0) {
+&nbsp;
+        return res.status(406).send(`Price should be greater than 0`);
+    }
+&nbsp;
+    if (!title) {
+&nbsp;
+        return res.status(406).send("Title can't be empty");
+    }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        const product = await createProductService(usersId, type, title, method, inventory, price);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        return res.status(201).json({ product });</span>
+<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+}
+&nbsp;
+export async function updateProduct(req: Request, res: Response) {
+    const usersId   = parseInt(req.body.usersId);
+    const productId = parseInt(req.params.productId);
+    const type      = req.body.type?.toString();
+    const title     = req.body.title?.toString();
+    const method    = req.body.method?.toString();
+    const inventory = parseInt(req.body.inventory);
+    const price     = Number(req.body.price);
+&nbsp;
+    const allowedTypes   = process.env.ALLOWED_TYPES<span class="branch-0 cbranch-no" title="branch not covered" > || ['books', 'movies', 'series'];</span>
+    const allowedMethods = process.env.ALLOWED_METHODS<span class="branch-0 cbranch-no" title="branch not covered" > || ['renting', 'selling', 'both'];</span>
+&nbsp;
+    if (!usersId) {
+&nbsp;
+        return res.status(406).send("User ID can't be empty");
+    }
+&nbsp;
+    if (!productId) {
+&nbsp;
+        return res.status(406).send("Product ID can't be empty");
+    }
+&nbsp;
+    if (!type || !allowedTypes.includes(type)) {
+&nbsp;
+        return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
+    }
+&nbsp;
+    if (!method || !allowedMethods.includes(method)) {
+&nbsp;
+        return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
+    }
+&nbsp;
+    if (isNaN(inventory) || inventory &lt; 0) {
+&nbsp;
+        return res.status(406).send(`Inventory should be greater than or equal to 0`);
+    }
+&nbsp;
+    if (isNaN(price) || price &lt;= 0) {
+&nbsp;
+        return res.status(406).send(`Price should be greater than 0`);
+    }
+&nbsp;
+    if (!title) {
 &nbsp;
         return res.status(406).send("Name can't be empty");
     }
-&nbsp;
-    if (!usersId) {
-&nbsp;
-        return res.status(406).send("User ID can't be empty");
-    }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
@@ -434,9 +638,14 @@ export async function createCustomer(req: Request, res: Response) {
 <span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const customer = await createCustomerService(name, usersId);</span>
+<span class="cstat-no" title="statement not covered" >        if (!await selectProductService(productId)) {</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(201).json({ customer });</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Product not found");</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        const product = await updateProductService(productId, usersId, type, title, method, inventory, price);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ product });</span>
 <span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
 <span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -444,54 +653,13 @@ export async function createCustomer(req: Request, res: Response) {
 <span class="cstat-no" title="statement not covered" >    }</span>
 }
 &nbsp;
-export async function updateCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
-    const usersId = parseInt(req.body.usersId);
-    const name = req.body.name?.toString();
+export async function deleteProduct(req: Request, res: Response) {
+    const productId = parseInt(req.params.productId);
+    const usersId   = parseInt(req.body.usersId);
+  
+    if (!productId) {
 &nbsp;
-    if (!customerId) {
-&nbsp;
-        return res.status(406).send("Customer ID can't be empty");
-    }
-&nbsp;
-    if (!usersId) {
-&nbsp;
-        return res.status(406).send("User ID can't be empty");
-    }
-&nbsp;
-    if (!name) {
-&nbsp;
-        return res.status(406).send("Name can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectCustomerService(customerId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Customer not found");</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const customer = await updateCustomerService(customerId, name, usersId);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ customer });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-}
-&nbsp;
-export async function deleteCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
-    const usersId = parseInt(req.body.usersId);
-&nbsp;
-    if (!customerId) {
-&nbsp;
-        return res.status(406).send("Customer ID can't be empty");
+        return res.status(406).send("Product ID can't be empty");
     }
 &nbsp;
     if (!usersId) {
@@ -505,14 +673,14 @@ export async function deleteCustomer(req: Request, res: Response) {
 <span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectCustomerService(customerId)) {</span>
+<span class="cstat-no" title="statement not covered" >        if (!await selectProductService(productId)) {</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Customer not found");</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Product not found");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const customer = await deleteCustomerService(customerId, usersId);</span>
+<span class="cstat-no" title="statement not covered" >        const product = await deleteProductService(productId, usersId);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ customer });</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ product });</span>
 <span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
 <span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
 <span class="cstat-no" title="statement not covered" ></span>

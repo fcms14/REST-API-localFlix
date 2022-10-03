@@ -48,27 +48,27 @@ export async function selectProduct(req: Request, res: Response) {
 }
 
 export async function createProduct(req: Request, res: Response) {
-    const type      = req.body.type.toString();
-    const title     = req.body.title.toString();
-    const method    = req.body.method.toString();
-    const inventory = parseInt(req.body.inventory);
-    const price     = Number(req.body.price.toFixed(2));
     const usersId   = parseInt(req.body.usersId);
+    const type      = req.body.type?.toString();
+    const method    = req.body.method?.toString();
+    const inventory = parseInt(req.body.inventory);
+    const price     = Number(req.body.price);
+    const title     = req.body.title?.toString();
 
-    const allowedTypes   = process.env.ALLOWED_TYPES || [''];
-    const allowedMethods = process.env.ALLOWED_METHODS || [''];
+    const allowedTypes   = process.env.ALLOWED_TYPES || ['books', 'movies', 'series'];
+    const allowedMethods = process.env.ALLOWED_METHODS || ['renting', 'selling', 'both'];
 
     if (!usersId) {
 
         return res.status(406).send("User ID can't be empty");
     }
 
-    if (!allowedTypes.includes(type)) {
+    if (!type || !allowedTypes.includes(type)) {
 
         return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
     }
 
-    if (!allowedMethods.includes(method)) {
+    if (!method || !allowedMethods.includes(method)) {
 
         return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
     }
@@ -85,7 +85,7 @@ export async function createProduct(req: Request, res: Response) {
 
     if (!title) {
 
-        return res.status(406).send("Name can't be empty");
+        return res.status(406).send("Title can't be empty");
     }
 
     try {
@@ -105,16 +105,16 @@ export async function createProduct(req: Request, res: Response) {
 }
 
 export async function updateProduct(req: Request, res: Response) {
-    const productId = parseInt(req.params.productId);
-    const type      = req.body.type.toString();
-    const title     = req.body.title.toString();
-    const method    = req.body.method.toString();
-    const inventory = parseInt(req.body.inventory);
-    const price     = Number(req.body.price.toFixed(2));
     const usersId   = parseInt(req.body.usersId);
+    const productId = parseInt(req.params.productId);
+    const type      = req.body.type?.toString();
+    const title     = req.body.title?.toString();
+    const method    = req.body.method?.toString();
+    const inventory = parseInt(req.body.inventory);
+    const price     = Number(req.body.price);
 
-    const allowedTypes   = process.env.ALLOWED_TYPES || [''];
-    const allowedMethods = process.env.ALLOWED_METHODS || [''];
+    const allowedTypes   = process.env.ALLOWED_TYPES || ['books', 'movies', 'series'];
+    const allowedMethods = process.env.ALLOWED_METHODS || ['renting', 'selling', 'both'];
 
     if (!usersId) {
 
@@ -126,12 +126,12 @@ export async function updateProduct(req: Request, res: Response) {
         return res.status(406).send("Product ID can't be empty");
     }
 
-    if (!allowedTypes.includes(type)) {
+    if (!type || !allowedTypes.includes(type)) {
 
         return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
     }
 
-    if (!allowedMethods.includes(method)) {
+    if (!method || !allowedMethods.includes(method)) {
 
         return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
     }
@@ -175,15 +175,15 @@ export async function updateProduct(req: Request, res: Response) {
 export async function deleteProduct(req: Request, res: Response) {
     const productId = parseInt(req.params.productId);
     const usersId   = parseInt(req.body.usersId);
+  
+    if (!productId) {
+
+        return res.status(406).send("Product ID can't be empty");
+    }
 
     if (!usersId) {
 
         return res.status(406).send("User ID can't be empty");
-    }
-    
-    if (!productId) {
-
-        return res.status(406).send("Product ID can't be empty");
     }
 
     try {

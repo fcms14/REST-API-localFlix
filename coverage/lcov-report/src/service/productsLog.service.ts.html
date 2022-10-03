@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/service/customer.service.ts</title>
+    <title>Code coverage report for src/service/productsLog.service.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/service</a> customer.service.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/service</a> productsLog.service.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.44% </span>
+                <span class="strong">11.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/49</span>
+                <span class='fraction'>7/61</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">22.44% </span>
+                <span class="strong">11.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/49</span>
+                <span class='fraction'>7/61</span>
             </div>
         
             
@@ -112,30 +112,18 @@
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -161,56 +149,101 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { prisma } from "../prisma";
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { prisma } from "../prisma";
 &nbsp;
-export <span class="fstat-no" title="function not covered" >async function listCustomerService(name?: string) {</span>
-<span class="cstat-no" title="statement not covered" >    return await prisma.customers.findMany({</span>
-<span class="cstat-no" title="statement not covered" >        where: {</span>
-<span class="cstat-no" title="statement not covered" >            name: {</span>
-<span class="cstat-no" title="statement not covered" >                contains: name,</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
+export <span class="fstat-no" title="function not covered" >async function createProductsLogService(productsId: number, quantity: number, price: number, usersId?: number, customersId?: number, returningAt?: any) {</span>
+<span class="cstat-no" title="statement not covered" >    return await prisma.productsLog.create({</span>
+<span class="cstat-no" title="statement not covered" >        data: {</span>
+<span class="cstat-no" title="statement not covered" >            productsId,</span>
+<span class="cstat-no" title="statement not covered" >            quantity,</span>
+<span class="cstat-no" title="statement not covered" >            price,</span>
+<span class="cstat-no" title="statement not covered" >            returningAt,</span>
+<span class="cstat-no" title="statement not covered" >            usersId,</span>
+<span class="cstat-no" title="statement not covered" >            customersId</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
-export <span class="fstat-no" title="function not covered" >async function selectCustomerService(customerId: number) {</span>
-<span class="cstat-no" title="statement not covered" >    return await prisma.customers.findUnique({ where: { id: customerId } });</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;
-export <span class="fstat-no" title="function not covered" >async function createCustomerService(name: string, usersId: number) {</span>
-<span class="cstat-no" title="statement not covered" >    return await prisma.customers.create({</span>
+export <span class="fstat-no" title="function not covered" >async function returninProductsLogService(productsId: number, customersId: number, usersId?: number) {</span>
+<span class="cstat-no" title="statement not covered" >    const transaction = await prisma.productsLog.findFirst({</span>
+<span class="cstat-no" title="statement not covered" >        where: {</span>
+<span class="cstat-no" title="statement not covered" >            productsId,</span>
+<span class="cstat-no" title="statement not covered" >            customersId,</span>
+<span class="cstat-no" title="statement not covered" >            returnedAt: null,</span>
+<span class="cstat-no" title="statement not covered" >            NOT: [{ returningAt: null }]</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if (!transaction) {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        return null;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return await prisma.productsLog.update({</span>
+<span class="cstat-no" title="statement not covered" >        where: {</span>
+<span class="cstat-no" title="statement not covered" >            id: transaction?.id</span>
+<span class="cstat-no" title="statement not covered" >        },</span>
 <span class="cstat-no" title="statement not covered" >        data: {</span>
-<span class="cstat-no" title="statement not covered" >            name,</span>
+<span class="cstat-no" title="statement not covered" >            updatedAt: new Date(),</span>
+<span class="cstat-no" title="statement not covered" >            returnedAt: new Date(),</span>
 <span class="cstat-no" title="statement not covered" >            usersId</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
-export <span class="fstat-no" title="function not covered" >async function updateCustomerService(customerId: number, name: string, usersId: number) {</span>
-<span class="cstat-no" title="statement not covered" >    return await prisma.customers.update({</span>
+export <span class="fstat-no" title="function not covered" >async function listProductsLogService(pendingReturn?: string, startAt?: string, endAt?: string, method?: string, customersList?: any, productsList? : any) {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return await prisma.productsLog.findMany({</span>
 <span class="cstat-no" title="statement not covered" >        where: {</span>
-<span class="cstat-no" title="statement not covered" >            id: customerId,</span>
-<span class="cstat-no" title="statement not covered" >        },</span>
-<span class="cstat-no" title="statement not covered" >        data: {</span>
-<span class="cstat-no" title="statement not covered" >            name,</span>
-<span class="cstat-no" title="statement not covered" >            usersId,</span>
-<span class="cstat-no" title="statement not covered" >            updatedAt: new Date()</span>
+<span class="cstat-no" title="statement not covered" >            productsId: productsList.length ? { in: productsList} : undefined,</span>
+<span class="cstat-no" title="statement not covered" >            customersId: customersList.length ? { in: customersList} : undefined,</span>
+<span class="cstat-no" title="statement not covered" >            createdAt: startAt ? { gte: new Date(startAt)} : undefined,</span>
+<span class="cstat-no" title="statement not covered" >            AND: [</span>
+<span class="cstat-no" title="statement not covered" >                {createdAt: endAt ? {lte: new Date( endAt)} : undefined}</span>
+<span class="cstat-no" title="statement not covered" >            ],</span>
+<span class="cstat-no" title="statement not covered" >            returnedAt: pendingReturn === "true" ? null : undefined,</span>
+<span class="cstat-no" title="statement not covered" >            returningAt: method === 'selling' ? null : undefined,</span>
+<span class="cstat-no" title="statement not covered" >            NOT: [</span>
+<span class="cstat-no" title="statement not covered" >                { returningAt: pendingReturn ? null : undefined },</span>
+<span class="cstat-no" title="statement not covered" >                { returnedAt: pendingReturn === "false" ? null : undefined }</span>
+<span class="cstat-no" title="statement not covered" >            ]</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;
-export <span class="fstat-no" title="function not covered" >async function deleteCustomerService(customerId: number, usersId: number) {</span>
-<span class="cstat-no" title="statement not covered" >    return await prisma.customers.update({</span>
-<span class="cstat-no" title="statement not covered" >        where: {</span>
-<span class="cstat-no" title="statement not covered" >            id: customerId,</span>
-<span class="cstat-no" title="statement not covered" >        },</span>
-<span class="cstat-no" title="statement not covered" >        data: {</span>
-<span class="cstat-no" title="statement not covered" >            usersId,</span>
-<span class="cstat-no" title="statement not covered" >            deletedAt: new Date()</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;</pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
