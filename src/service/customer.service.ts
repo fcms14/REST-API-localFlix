@@ -1,5 +1,5 @@
 import { prisma } from "../prisma";
-import { Customer } from "../model/customer.model";
+import { Customer, CustomerCreate } from "../model/customer.model";
 
 export const customer = (mock?: typeof prisma) => {
     const database = mock || prisma;
@@ -14,39 +14,36 @@ export const customer = (mock?: typeof prisma) => {
         });
     };
     
-    const select = async (customerId: number) => {
-        return await database.customers.findUnique({ where: { id: customerId } });
+    const select = async (customer: Customer) => {
+        return await database.customers.findUnique({ where: { id: Number(customer.customerId) } });
     };
     
-    const create = async (name: string, usersId: number) => {
+    const create = async (customer: CustomerCreate) => {
         return await database.customers.create({
-            data: {
-                name,
-                usersId
-            }
+            data: customer
         });
     };
     
-    const update = async (customerId: number, name: string, usersId: number) => {
+    const update = async (customer: CustomerCreate) => {
         return await database.customers.update({
             where: {
-                id: customerId,
+                id: customer.customerId,
             },
             data: {
-                name,
-                usersId,
+                name: customer.name,
+                usersId: customer.usersId ? !isNaN(customer.usersId) ? customer.usersId : undefined : undefined,
                 updatedAt: new Date()
             }
         });
     };
     
-    const remove = async (customerId: number, usersId: number) => {
+    const remove = async (customer: Customer) => {
         return await database.customers.update({
             where: {
-                id: customerId,
+                id: customer.customerId,
             },
             data: {
-                usersId,
+                usersId: customer.usersId ? !isNaN(customer.usersId) ? customer.usersId : undefined : undefined,
                 deletedAt: new Date()
             }
         });

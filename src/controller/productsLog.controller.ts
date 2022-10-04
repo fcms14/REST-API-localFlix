@@ -20,6 +20,9 @@ export const transactionController = (mock?: typeof prisma) => {
         const returningAt = req.body.returningAt ? new Date(req.body.returningAt) : null;
         const customersId = parseInt(req.body.customersId);
         const usersId     = parseInt(req.body.usersId);
+
+        const {body: _transaction} = req;
+        const _customer = {customerId: parseInt(_transaction.customersId)};
     
         const allowedTransactions = process.env.ALLOWED_TRANSACTIONS || ['renting', 'selling'];
     
@@ -43,7 +46,7 @@ export const transactionController = (mock?: typeof prisma) => {
             return res.status(406).send("Returning Date can't be empty");
         }
     
-        if (method === "renting" && !customersId) {
+        if (method === "renting" && !_customer.customerId) {
     
             return res.status(406).send("Customer ID can't be empty");
         }
@@ -65,8 +68,8 @@ export const transactionController = (mock?: typeof prisma) => {
                 return res.status(406).send(`Unavailable quantity. ${product.inventory} is available`);
             }
     
-            const customer = customersId ? await customerService.select(customersId) : null;
-            if (customersId && !customer) {
+            const customer = _customer.customerId ? await customerService.select(_customer) : null;
+            if (_customer.customerId && !customer) {
     
                 return res.status(404).send("Customer not found");
             }
@@ -96,13 +99,16 @@ export const transactionController = (mock?: typeof prisma) => {
         const productsId  = parseInt(req.body.productsId);
         const customersId = parseInt(req.body.customersId);
         const usersId     = parseInt(req.body.usersId);
+
+        const {body: _transaction} = req;
+        const _customer = {customerId: parseInt(_transaction.customersId)};
     
         if (!productsId) {
     
             return res.status(406).send("Product ID can't be empty");
         }
     
-        if (!customersId) {
+        if (!_customer.customerId) {
     
             return res.status(406).send("Customer ID can't be empty");
         }
@@ -114,7 +120,7 @@ export const transactionController = (mock?: typeof prisma) => {
                 return res.status(404).send("Product not found");
             }
     
-            const customer = await customerService.select(customersId);
+            const customer = await customerService.select(_customer);
             if (!customer) {
     
                 return res.status(404).send("Customer not found");

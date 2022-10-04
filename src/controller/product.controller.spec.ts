@@ -21,7 +21,7 @@ describe('createProduct', () => {
         expect((await controller.create({body: {usersId: ''}} as Request, createResponse())).statusCode).toBe(406);
     });
 
-    it('should not be able to create a user with usersId as a string', async () => {
+    it('should not be able to create a product with usersId as a string', async () => {
         expect((await controller.create({body: {usersId: 'a'}} as Request, createResponse())).statusCode).toBe(406);
     });
 

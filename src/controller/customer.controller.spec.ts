@@ -31,10 +31,6 @@ describe('createCustomer', () => {
         expect((await controller.create({body: {name: ''}} as Request, createResponse())).statusCode).toBe(406);
     });
 
-    it('should not be able to create a customer with empty usersId', async () => {
-        expect((await controller.create({body: {name: 'a', usersId: ''}} as Request, createResponse())).statusCode).toBe(406);
-    });
-
     it('should not be able to create a user with usersId as a string', async () => {
         expect((await controller.create({body: {name: 'a', usersId: 'a'}} as Request, createResponse())).statusCode).toBe(406);
     });
@@ -48,11 +44,6 @@ describe('updateCustomer', () => {
 
     it('should not be able to update a customer with customerId as a string', async () => {
         const request  = createRequest({method: 'PUT', params: { customerId: 'a'} });
-        expect((await controller.update(request, createResponse())).statusCode).toBe(406);
-    });
-
-    it('should not be able to update a customer with empty usersId', async () => {
-        const request  = createRequest({method: 'PUT', params: { customerId: 1,}, body: { usersId: '' } });
         expect((await controller.update(request, createResponse())).statusCode).toBe(406);
     });
 
@@ -77,14 +68,6 @@ describe('deleteCustomer', () => {
         const request  = createRequest({ method: 'DELETE', params: { customerId: 'a' } });
         expect((await controller.remove(request, createResponse())).statusCode).toBe(406);
     });
-
-    it('should not be able to delete a customer with empty usersId', async () => {
-        const request  = createRequest({ method: 'DELETE', body: { usersId: '' }, params: { customerId: 1 } });
-        expect((await controller.remove(request, createResponse())).statusCode).toBe(406);
-    });
-
-    it('should not be able to delete a customer with usersId as a string', async () => {
-        const request  = createRequest({ method: 'DELETE', body: { usersId: 'a' }, params: { customerId: 1 } });
-        expect((await controller.remove(request, createResponse())).statusCode).toBe(406);
-    });
 });
+
+// "usersId": 1,

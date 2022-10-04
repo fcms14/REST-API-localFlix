@@ -8,10 +8,10 @@ export const customerController = (mock?:{}) => {
     const service = customer();
     
     const list = async (req: Request, res: Response) => {
-        const {query: customer} = req;
+        const {query: _customer} = req;
         
         try {
-            const customers = await service.list(customer);
+            const customers = await service.list(_customer);
     
             if (!customers || !customers.length) {
     
@@ -27,15 +27,15 @@ export const customerController = (mock?:{}) => {
     };
     
     const select = async (req: Request, res: Response) => {
-        const customerId = parseInt(req.params.customerId);
-    
-        if (!customerId) {
+        const {params: _customer} = req;
+
+        if (!_customer.customerId || isNaN(parseInt(_customer.customerId))) {
     
             return res.status(406).send("Customer ID can't be empty");
         }
     
         try {
-            const customer = await service.select(customerId);
+            const customer = await service.select(_customer);
             if (!customer) {
     
                 return res.status(404).send("Customer not found");
@@ -50,26 +50,25 @@ export const customerController = (mock?:{}) => {
     };
     
     const create = async (req: Request, res: Response) => {
-        const name    = req.body.name?.toString();
-        const usersId = parseInt(req.body.usersId);
+        const {body: _customer} = req;
     
-        if (!name) {
+        if (!_customer.name) {
     
             return res.status(406).send("Name can't be empty");
         }
     
-        if (!usersId) {
+        if (_customer.usersId && isNaN(parseInt(_customer.usersId))) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
         try {
-            if (!await userService.select(usersId)) {
+            if (!!_customer.usersId && !await userService.select(_customer.usersId)) {
     
                 return res.status(404).send("User not found");
             }
     
-            const customer = await service.create(name, usersId);
+            const customer = await service.create(_customer);
     
             return res.status(201).json({ customer });
         } catch (e: any) {
@@ -80,37 +79,36 @@ export const customerController = (mock?:{}) => {
     };
     
     const update = async (req: Request, res: Response) => {
-        const customerId = parseInt(req.params.customerId);
-        const usersId = parseInt(req.body.usersId);
-        const name = req.body.name?.toString();
+        const {body, params} = req;
+        const _customer = {name: body.name, usersId: parseInt(body.usersId), customerId: parseInt(params.customerId)};
     
-        if (!customerId) {
+        if (!_customer.customerId || isNaN(_customer.customerId)) {
     
             return res.status(406).send("Customer ID can't be empty");
         }
-    
-        if (!usersId) {
+
+        if (_customer.usersId && isNaN(_customer.usersId)) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
-        if (!name) {
+        if (!_customer.name) {
     
             return res.status(406).send("Name can't be empty");
         }
     
         try {
-            if (!await userService.select(usersId)) {
+            if (!!_customer.usersId && !await userService.select(_customer.usersId)) {
     
                 return res.status(404).send("User not found");
             }
     
-            if (!await service.select(customerId)) {
+            if (!await service.select(_customer)) {
     
                 return res.status(404).send("Customer not found");
             }
     
-            const customer = await service.update(customerId, name, usersId);
+            const customer = await service.update(_customer);
     
             return res.status(200).json({ customer });
         } catch (e: any) {
@@ -121,31 +119,31 @@ export const customerController = (mock?:{}) => {
     };
     
     const remove = async (req: Request, res: Response) => {
-        const customerId = parseInt(req.params.customerId);
-        const usersId = parseInt(req.body.usersId);
+        const {body, params} = req;
+        const _customer = {customerId: parseInt(params.customerId), usersId: parseInt(body.usersId)};
     
-        if (!customerId) {
+        if (!_customer.customerId || isNaN(_customer.customerId)) {
     
             return res.status(406).send("Customer ID can't be empty");
         }
-    
-        if (!usersId) {
-    
+
+        if (_customer.usersId && isNaN(_customer.usersId)) {
+
             return res.status(406).send("User ID can't be empty");
         }
     
         try {
-            if (!await userService.select(usersId)) {
+            if (!!_customer.usersId && !await userService.select(_customer.usersId)) {
     
                 return res.status(404).send("User not found");
             }
             
-            if (!await service.select(customerId)) {
+            if (!await service.select(_customer)) {
     
                 return res.status(404).send("Customer not found");
             }
     
-            const customer = await service.remove(customerId, usersId);
+            const customer = await service.remove(_customer);
     
             return res.status(200).json({ customer });
         } catch (e: any) {

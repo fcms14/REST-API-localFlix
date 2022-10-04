@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.14% </span>
+                <span class="strong">33.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/56</span>
+                <span class='fraction'>18/53</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.14% </span>
+                <span class="strong">33.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/56</span>
+                <span class='fraction'>18/53</span>
             </div>
         
             
@@ -116,10 +116,7 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -140,9 +137,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -176,7 +170,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { prisma } from "../prisma";
-import { Customer } from "../model/customer.model";
+import { Customer, CustomerCreate } from "../model/customer.model";
 &nbsp;
 export const customer = (mock?: typeof prisma) =&gt; {
     const database = mock || prisma;
@@ -191,39 +185,36 @@ export const customer = (mock?: typeof prisma) =&gt; {
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const select = <span class="fstat-no" title="function not covered" >async (customerId: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return await database.customers.findUnique({ where: { id: customerId } });</span>
+    const select = <span class="fstat-no" title="function not covered" >async (customer: Customer) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return await database.customers.findUnique({ where: { id: Number(customer.customerId) } });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const create = <span class="fstat-no" title="function not covered" >async (name: string, usersId: number) =&gt; {</span>
+    const create = <span class="fstat-no" title="function not covered" >async (customer: CustomerCreate) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.customers.create({</span>
-<span class="cstat-no" title="statement not covered" >            data: {</span>
-<span class="cstat-no" title="statement not covered" >                name,</span>
-<span class="cstat-no" title="statement not covered" >                usersId</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >            data: customer</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const update = <span class="fstat-no" title="function not covered" >async (customerId: number, name: string, usersId: number) =&gt; {</span>
+    const update = <span class="fstat-no" title="function not covered" >async (customer: CustomerCreate) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.customers.update({</span>
 <span class="cstat-no" title="statement not covered" >            where: {</span>
-<span class="cstat-no" title="statement not covered" >                id: customerId,</span>
+<span class="cstat-no" title="statement not covered" >                id: customer.customerId,</span>
 <span class="cstat-no" title="statement not covered" >            },</span>
 <span class="cstat-no" title="statement not covered" >            data: {</span>
-<span class="cstat-no" title="statement not covered" >                name,</span>
-<span class="cstat-no" title="statement not covered" >                usersId,</span>
+<span class="cstat-no" title="statement not covered" >                name: customer.name,</span>
+<span class="cstat-no" title="statement not covered" >                usersId: customer.usersId ? !isNaN(customer.usersId) ? customer.usersId : undefined : undefined,</span>
 <span class="cstat-no" title="statement not covered" >                updatedAt: new Date()</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const remove = <span class="fstat-no" title="function not covered" >async (customerId: number, usersId: number) =&gt; {</span>
+    const remove = <span class="fstat-no" title="function not covered" >async (customer: Customer) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.customers.update({</span>
 <span class="cstat-no" title="statement not covered" >            where: {</span>
-<span class="cstat-no" title="statement not covered" >                id: customerId,</span>
+<span class="cstat-no" title="statement not covered" >                id: customer.customerId,</span>
 <span class="cstat-no" title="statement not covered" >            },</span>
 <span class="cstat-no" title="statement not covered" >            data: {</span>
-<span class="cstat-no" title="statement not covered" >                usersId,</span>
+<span class="cstat-no" title="statement not covered" >                usersId: customer.usersId ? !isNaN(customer.usersId) ? customer.usersId : undefined : undefined,</span>
 <span class="cstat-no" title="statement not covered" >                deletedAt: new Date()</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
@@ -238,7 +229,7 @@ export const customer = (mock?: typeof prisma) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T11:57:55.966Z
+                at 2022-10-04T14:36:19.848Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
