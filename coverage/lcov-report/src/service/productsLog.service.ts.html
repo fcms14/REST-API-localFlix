@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.4% </span>
+                <span class="strong">23.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/67</span>
+                <span class='fraction'>14/60</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.4% </span>
+                <span class="strong">23.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/67</span>
+                <span class='fraction'>14/60</span>
             </div>
         
             
@@ -123,26 +123,13 @@
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -176,7 +163,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -198,29 +184,23 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { prisma } from "../prisma";
+import { ProductsLog, ProductsLogCreate, ProductsFilters } from "../model/productsLog.model";
 &nbsp;
 export const transaction = (mock?: typeof prisma) =&gt; {
-    const database = <span class="branch-0 cbranch-no" title="branch not covered" >mock || prisma;</span>
+    const database = mock || prisma;
 &nbsp;
-    const create = <span class="fstat-no" title="function not covered" >async (productsId: number, quantity: number, price: number, usersId?: number, customersId?: number, returningAt?: any) =&gt; {</span>
+    const create = <span class="fstat-no" title="function not covered" >async (productsLog : ProductsLogCreate) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.productsLog.create({</span>
-<span class="cstat-no" title="statement not covered" >            data: {</span>
-<span class="cstat-no" title="statement not covered" >                productsId,</span>
-<span class="cstat-no" title="statement not covered" >                quantity,</span>
-<span class="cstat-no" title="statement not covered" >                price,</span>
-<span class="cstat-no" title="statement not covered" >                returningAt,</span>
-<span class="cstat-no" title="statement not covered" >                usersId,</span>
-<span class="cstat-no" title="statement not covered" >                customersId</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >            data: productsLog</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const returning = <span class="fstat-no" title="function not covered" >async (productsId: number, customersId: number, usersId?: number) =&gt; {</span>
+    const returning = <span class="fstat-no" title="function not covered" >async (productsLog: ProductsLog) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        const transaction = await database.productsLog.findFirst({</span>
 <span class="cstat-no" title="statement not covered" >            where: {</span>
-<span class="cstat-no" title="statement not covered" >                productsId,</span>
-<span class="cstat-no" title="statement not covered" >                customersId,</span>
-<span class="cstat-no" title="statement not covered" >                returnedAt: null,</span>
+<span class="cstat-no" title="statement not covered" >                productsId:  productsLog.productsId,</span>
+<span class="cstat-no" title="statement not covered" >                customersId: productsLog.customersId,</span>
+<span class="cstat-no" title="statement not covered" >                returnedAt:  null,</span>
 <span class="cstat-no" title="statement not covered" >                NOT: [{ returningAt: null }]</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
@@ -235,28 +215,27 @@ export const transaction = (mock?: typeof prisma) =&gt; {
 <span class="cstat-no" title="statement not covered" >                id: transaction?.id</span>
 <span class="cstat-no" title="statement not covered" >            },</span>
 <span class="cstat-no" title="statement not covered" >            data: {</span>
-<span class="cstat-no" title="statement not covered" >                updatedAt: new Date(),</span>
+<span class="cstat-no" title="statement not covered" >                updatedAt:  new Date(),</span>
 <span class="cstat-no" title="statement not covered" >                returnedAt: new Date(),</span>
-<span class="cstat-no" title="statement not covered" >                usersId</span>
+<span class="cstat-no" title="statement not covered" >                usersId: productsLog.usersId</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const list = <span class="fstat-no" title="function not covered" >async (pendingReturn?: string, startAt?: string, endAt?: string, method?: string, customersList?: any, productsList? : any) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    </span>
+    const list = <span class="fstat-no" title="function not covered" >async (productsLog: ProductsFilters, customersList?: any, productsList?: any) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.productsLog.findMany({</span>
 <span class="cstat-no" title="statement not covered" >            where: {</span>
 <span class="cstat-no" title="statement not covered" >                productsId: productsList.length ? { in: productsList} : undefined,</span>
 <span class="cstat-no" title="statement not covered" >                customersId: customersList.length ? { in: customersList} : undefined,</span>
-<span class="cstat-no" title="statement not covered" >                createdAt: startAt ? { gte: new Date(startAt)} : undefined,</span>
+<span class="cstat-no" title="statement not covered" >                createdAt: productsLog.startAt ? { gte: new Date(productsLog.startAt)} : undefined,</span>
 <span class="cstat-no" title="statement not covered" >                AND: [</span>
-<span class="cstat-no" title="statement not covered" >                    {createdAt: endAt ? {lte: new Date( endAt)} : undefined}</span>
+<span class="cstat-no" title="statement not covered" >                    {createdAt: productsLog.endAt ? {lte: new Date( productsLog.endAt)} : undefined}</span>
 <span class="cstat-no" title="statement not covered" >                ],</span>
-<span class="cstat-no" title="statement not covered" >                returnedAt: pendingReturn === "true" ? null : undefined,</span>
-<span class="cstat-no" title="statement not covered" >                returningAt: method === 'selling' ? null : undefined,</span>
+<span class="cstat-no" title="statement not covered" >                returnedAt: productsLog.pendingReturn === "true" ? null : undefined,</span>
+<span class="cstat-no" title="statement not covered" >                returningAt: productsLog.method === 'selling' ? null : undefined,</span>
 <span class="cstat-no" title="statement not covered" >                NOT: [</span>
-<span class="cstat-no" title="statement not covered" >                    { returningAt: pendingReturn ? null : undefined },</span>
-<span class="cstat-no" title="statement not covered" >                    { returnedAt: pendingReturn === "false" ? null : undefined }</span>
+<span class="cstat-no" title="statement not covered" >                    { returningAt: productsLog.pendingReturn ? null : undefined },</span>
+<span class="cstat-no" title="statement not covered" >                    { returnedAt: productsLog.pendingReturn === "false" ? null : undefined }</span>
 <span class="cstat-no" title="statement not covered" >                ]</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
@@ -271,7 +250,7 @@ export const transaction = (mock?: typeof prisma) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T14:36:19.848Z
+                at 2022-10-04T17:02:50.598Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

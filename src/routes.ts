@@ -2,11 +2,8 @@ import express from 'express';
 
 import { userController } from './controller/user.controller';
 import { customerController } from './controller/customer.controller';
-
 import { productController } from './controller/product.controller';
-
 import { transactionController } from './controller/productsLog.controller';
-
 import { ensureCompanyAuthenticated } from "./middleware/company.middleware";
 import { ensureCustomerAuthenticated } from "./middleware/customer.middleware";
 

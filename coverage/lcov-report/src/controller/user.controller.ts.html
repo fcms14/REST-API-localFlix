@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.65% </span>
+                <span class="strong">42.74% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>55/126</span>
+                <span class='fraction'>53/124</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.23% </span>
+                <span class="strong">73.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/13</span>
+                <span class='fraction'>11/15</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.65% </span>
+                <span class="strong">42.74% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>55/126</span>
+                <span class='fraction'>53/124</span>
             </div>
         
             
@@ -187,11 +187,7 @@
 <a name='L122'></a><a href='#L122'>122</a>
 <a name='L123'></a><a href='#L123'>123</a>
 <a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -316,19 +312,17 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
-import { prisma } from "../prisma";
 import log from "../utils/logger";
 import { user } from '../service/user.service';
 &nbsp;
-export const userController = (mock?: typeof prisma) =&gt; {
-    const database = mock || prisma;
-    const service = user(database);
+export const userController = () =&gt; {
+    const service = user();
 &nbsp;
     const list = <span class="fstat-no" title="function not covered" >async (req: Request, res: Response) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        const name = req.query.name?.toString();</span>
+<span class="cstat-no" title="statement not covered" >        const {query: _user} = req;</span>
 <span class="cstat-no" title="statement not covered" >        </span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const users = await service.list(name);</span>
+<span class="cstat-no" title="statement not covered" >            const users = await service.list(_user);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            if (!users || !users.length) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
@@ -344,15 +338,15 @@ export const userController = (mock?: typeof prisma) =&gt; {
 <span class="cstat-no" title="statement not covered" >    };</span>
     
     const select = async (req: Request, res: Response) =&gt; {
-        const userId = parseInt(req.params.userId);
+        const {params: _user} = req;
     
-        if (!userId) {
+        if (!_user.userId || isNaN(parseInt(_user.userId))) {
     
             return res.status(406).send("User ID can't be empty");
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const user = await service.select(userId);</span>
+<span class="cstat-no" title="statement not covered" >            const user = await service.select(_user);</span>
 <span class="cstat-no" title="statement not covered" >            if (!user) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
@@ -367,15 +361,15 @@ export const userController = (mock?: typeof prisma) =&gt; {
     };
     
     const create = async (req: Request, res: Response) =&gt; {
-        const name = req.body.name?.toString();
+        const {body: _user} = req;
     
-        if (!name) {
+        if (!_user.name) {
     
             return res.status(406).send("Name can't be empty");
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const user = await service.create(name);</span>
+<span class="cstat-no" title="statement not covered" >            const user = await service.create(_user);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(201).json({ user });</span>
 <span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
@@ -386,26 +380,26 @@ export const userController = (mock?: typeof prisma) =&gt; {
     };
     
     const update = async (req: Request, res: Response) =&gt; {
-        const userId = parseInt(req.params.userId);
-        const name = req.body.name?.toString();
+        const {body, params} = req;
+        const _user = {name: body.name, userId: parseInt(params.userId)};
     
-        if (!userId) {
+        if (!_user.userId  || isNaN(_user.userId)) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
-        if (!name) {
+        if (!_user.name) {
     
             return res.status(406).send("Name can't be empty");
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            if (!await service.select(userId)) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await service.select(_user)) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            const user = await service.update(userId, name);</span>
+<span class="cstat-no" title="statement not covered" >            const user = await service.update(_user);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(200).json({ user });</span>
 <span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
@@ -416,20 +410,20 @@ export const userController = (mock?: typeof prisma) =&gt; {
     };
     
     const remove = async (req: Request, res: Response) =&gt; {
-        const userId = parseInt(req.params.userId);
+        const {params: _user} = req;
     
-        if (!userId) {
+        if (!_user.userId || isNaN(parseInt(_user.userId))) {
     
             return res.status(406).send("User ID can't be empty");
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            if (!await service.select(userId)) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await service.select(_user)) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            const user = await service.remove(userId);</span>
+<span class="cstat-no" title="statement not covered" >            const user = await service.remove(_user);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(200).json({ user });</span>
 <span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
@@ -448,7 +442,7 @@ export const userController = (mock?: typeof prisma) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T14:36:19.848Z
+                at 2022-10-04T17:02:50.598Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

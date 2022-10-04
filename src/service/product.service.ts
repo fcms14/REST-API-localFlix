@@ -4,76 +4,69 @@ import { Product, ProductCreate } from "../model/product.model";
 export const product = (mock?: typeof prisma) => {
     const database = mock || prisma;
 
-    const list = async (type?: string, title?: string, method?: string) => {
+    const list = async (product?: Product) => {
         return await database.products.findMany({
             where: {
                 type: {
-                    contains: type,
+                    contains: product?.type,
                 },
                 title: {
-                    contains: title,
+                    contains: product?.title,
                 },
                 method: {
-                    contains: method,
+                    contains: product?.method,
                 }
             }
         });
     };
     
-    const select = async (productId: number) => {
-        return await database.products.findUnique({ where: { id: productId } });
+    const select = async (product: Product) => {
+        return await database.products.findUnique({ where: { id: Number(product.productId) || Number(product.productsId) } });
     };
     
-    const create = async (usersId: number, type: string, title: string, method: string, inventory: number, price: number) => {
+    const create = async (product: ProductCreate) => {
         return await database.products.create({
-            data: {
-                usersId,
-                type,
-                title,
-                method,
-                inventory,
-                price
-            }
+            data: product
         });
     };
     
-    const update = async (productId: number, usersId: number, type: string, title: string, method: string, inventory: number, price: number) => {
+    const update = async (product: ProductCreate) => {
         return await database.products.update({
             where: {
-                id: productId,
+                id: product.productId,
             },
             data: {
-                usersId,
-                type,
-                title,
-                method,
-                inventory,
-                price,
+                usersId: product.usersId,
+                type: product.type,
+                title: product.title,
+                method: product.method,
+                inventory: product.inventory,
+                price: product.price,
                 updatedAt: new Date()
             }
         });
     };
     
-    const updateProductInventory = async (productId: number, inventory: number, usersId?: number) => {
+    const updateProductInventory = async (product: Product) => {
         return await database.products.update({
             where: {
-                id: productId,
+                id: product.productId,
             },
             data: {
-                usersId,
-                inventory,
+                usersId: product.usersId,
+                inventory: product.inventory,
                 updatedAt: new Date()
             }
         });
     };
     
-    const remove = async (productId: number, usersId: number) => {
+    const remove = async (product: Product) => {
         return await database.products.update({
             where: {
-                id: productId,
+                id: product.productId,
             },
             data: {
-                usersId,
+                usersId: product.usersId,
                 deletedAt: new Date()
             }
         });

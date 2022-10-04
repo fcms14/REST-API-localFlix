@@ -12,7 +12,7 @@ const mockService = () => {
     return { list, select, create, update, remove };
 };
 
-const controller = customerController(mockService);
+const controller = customerController();
 
 describe('selectCustomer', () => {
     it('should not be able to select a customer with empty customerId', async () => {

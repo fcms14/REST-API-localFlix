@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.69% </span>
+                <span class="strong">35.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/52</span>
+                <span class='fraction'>18/51</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.69% </span>
+                <span class="strong">35.29% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/52</span>
+                <span class='fraction'>18/51</span>
             </div>
         
             
@@ -114,10 +114,10 @@
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
@@ -135,8 +135,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -168,48 +166,47 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { prisma } from "../prisma";
+import { User, UserCreate } from "../model/user.model";
 &nbsp;
 export const user = (mock?: typeof prisma) =&gt; {
     const database = mock || prisma;
 &nbsp;
-    const list = <span class="fstat-no" title="function not covered" >async (name?: string) =&gt; {</span>
+    const list = <span class="fstat-no" title="function not covered" >async (user?: User) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.users.findMany({</span>
 <span class="cstat-no" title="statement not covered" >            where: {</span>
 <span class="cstat-no" title="statement not covered" >                name: {</span>
-<span class="cstat-no" title="statement not covered" >                    contains: name,</span>
+<span class="cstat-no" title="statement not covered" >                    contains: user?.name,</span>
 <span class="cstat-no" title="statement not covered" >                }</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const select = <span class="fstat-no" title="function not covered" >async (userId: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return await database.users.findUnique({ where: { id: userId } });</span>
+    const select = <span class="fstat-no" title="function not covered" >async (user: User) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return await database.users.findUnique({ where: { id: Number(user.userId) || Number(user.usersId)  } });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const create = <span class="fstat-no" title="function not covered" >async (name: string) =&gt; {</span>
+    const create = <span class="fstat-no" title="function not covered" >async (user: UserCreate) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.users.create({</span>
-<span class="cstat-no" title="statement not covered" >            data: {</span>
-<span class="cstat-no" title="statement not covered" >                name</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >            data: user</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const update = <span class="fstat-no" title="function not covered" >async (userId: number, name: string) =&gt; {</span>
+    const update = <span class="fstat-no" title="function not covered" >async (user: UserCreate) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.users.update({</span>
 <span class="cstat-no" title="statement not covered" >            where: {</span>
-<span class="cstat-no" title="statement not covered" >                id: userId,</span>
+<span class="cstat-no" title="statement not covered" >                id: user.userId,</span>
 <span class="cstat-no" title="statement not covered" >            },</span>
 <span class="cstat-no" title="statement not covered" >            data: {</span>
-<span class="cstat-no" title="statement not covered" >                name,</span>
+<span class="cstat-no" title="statement not covered" >                name: user.name,</span>
 <span class="cstat-no" title="statement not covered" >                updatedAt: new Date()</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
     
-    const remove = <span class="fstat-no" title="function not covered" >async (userId: number) =&gt; {</span>
+    const remove = <span class="fstat-no" title="function not covered" >async (user: User) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return await database.users.update({</span>
 <span class="cstat-no" title="statement not covered" >            where: {</span>
-<span class="cstat-no" title="statement not covered" >                id: userId,</span>
+<span class="cstat-no" title="statement not covered" >                id: Number(user.userId),</span>
 <span class="cstat-no" title="statement not covered" >            },</span>
 <span class="cstat-no" title="statement not covered" >            data: {</span>
 <span class="cstat-no" title="statement not covered" >                deletedAt: new Date()</span>
@@ -226,7 +223,7 @@ export const user = (mock?: typeof prisma) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T14:36:19.848Z
+                at 2022-10-04T17:02:50.598Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

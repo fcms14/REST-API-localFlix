@@ -1,17 +1,15 @@
 import { Request, Response } from "express";
-import { prisma } from "../prisma";
 import log from "../utils/logger";
 import { user } from '../service/user.service';
 
-export const userController = (mock?: typeof prisma) => {
-    const database = mock || prisma;
-    const service = user(database);
+export const userController = () => {
+    const service = user();
 
     const list = async (req: Request, res: Response) => {
-        const name = req.query.name?.toString();
+        const {query: _user} = req;
         
         try {
-            const users = await service.list(name);
+            const users = await service.list(_user);
     
             if (!users || !users.length) {
     
@@ -27,15 +25,15 @@ export const userController = (mock?: typeof prisma) => {
     };
     
     const select = async (req: Request, res: Response) => {
-        const userId = parseInt(req.params.userId);
+        const {params: _user} = req;
     
-        if (!userId) {
+        if (!_user.userId || isNaN(parseInt(_user.userId))) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
         try {
-            const user = await service.select(userId);
+            const user = await service.select(_user);
             if (!user) {
     
                 return res.status(404).send("User not found");
@@ -50,15 +48,15 @@ export const userController = (mock?: typeof prisma) => {
     };
     
     const create = async (req: Request, res: Response) => {
-        const name = req.body.name?.toString();
+        const {body: _user} = req;
     
-        if (!name) {
+        if (!_user.name) {
     
             return res.status(406).send("Name can't be empty");
         }
     
         try {
-            const user = await service.create(name);
+            const user = await service.create(_user);
     
             return res.status(201).json({ user });
         } catch (e: any) {
@@ -69,26 +67,26 @@ export const userController = (mock?: typeof prisma) => {
     };
     
     const update = async (req: Request, res: Response) => {
-        const userId = parseInt(req.params.userId);
-        const name = req.body.name?.toString();
+        const {body, params} = req;
+        const _user = {name: body.name, userId: parseInt(params.userId)};
     
-        if (!userId) {
+        if (!_user.userId  || isNaN(_user.userId)) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
-        if (!name) {
+        if (!_user.name) {
     
             return res.status(406).send("Name can't be empty");
         }
     
         try {
-            if (!await service.select(userId)) {
+            if (!await service.select(_user)) {
     
                 return res.status(404).send("User not found");
             }
     
-            const user = await service.update(userId, name);
+            const user = await service.update(_user);
     
             return res.status(200).json({ user });
         } catch (e: any) {
@@ -99,20 +97,20 @@ export const userController = (mock?: typeof prisma) => {
     };
     
     const remove = async (req: Request, res: Response) => {
-        const userId = parseInt(req.params.userId);
+        const {params: _user} = req;
     
-        if (!userId) {
+        if (!_user.userId || isNaN(parseInt(_user.userId))) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
         try {
-            if (!await service.select(userId)) {
+            if (!await service.select(_user)) {
     
                 return res.status(404).send("User not found");
             }
     
-            const user = await service.remove(userId);
+            const user = await service.remove(_user);
     
             return res.status(200).json({ user });
         } catch (e: any) {

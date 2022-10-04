@@ -1,27 +1,21 @@
 import { prisma } from "../prisma";
+import { ProductsLog, ProductsLogCreate, ProductsFilters } from "../model/productsLog.model";
 
 export const transaction = (mock?: typeof prisma) => {
     const database = mock || prisma;
 
-    const create = async (productsId: number, quantity: number, price: number, usersId?: number, customersId?: number, returningAt?: any) => {
+    const create = async (productsLog : ProductsLogCreate) => {
         return await database.productsLog.create({
-            data: {
-                productsId,
-                quantity,
-                price,
-                returningAt,
-                usersId,
-                customersId
-            }
+            data: productsLog
         });
     };
     
-    const returning = async (productsId: number, customersId: number, usersId?: number) => {
+    const returning = async (productsLog: ProductsLog) => {
         const transaction = await database.productsLog.findFirst({
             where: {
-                productsId,
-                customersId,
-                returnedAt: null,
+                productsId:  productsLog.productsId,
+                customersId: productsLog.customersId,
+                returnedAt:  null,
                 NOT: [{ returningAt: null }]
             }
         });
@@ -36,28 +30,27 @@ export const transaction = (mock?: typeof prisma) => {
                 id: transaction?.id
             },
             data: {
-                updatedAt: new Date(),
+                updatedAt:  new Date(),
                 returnedAt: new Date(),
-                usersId
+                usersId: productsLog.usersId
             }
         });
     };
     
-    const list = async (pendingReturn?: string, startAt?: string, endAt?: string, method?: string, customersList?: any, productsList? : any) => {
-    
+    const list = async (productsLog: ProductsFilters, customersList?: any, productsList?: any) => {
         return await database.productsLog.findMany({
             where: {
                 productsId: productsList.length ? { in: productsList} : undefined,
                 customersId: customersList.length ? { in: customersList} : undefined,
-                createdAt: startAt ? { gte: new Date(startAt)} : undefined,
+                createdAt: productsLog.startAt ? { gte: new Date(productsLog.startAt)} : undefined,
                 AND: [
-                    {createdAt: endAt ? {lte: new Date( endAt)} : undefined}
+                    {createdAt: productsLog.endAt ? {lte: new Date( productsLog.endAt)} : undefined}
                 ],
-                returnedAt: pendingReturn === "true" ? null : undefined,
-                returningAt: method === 'selling' ? null : undefined,
+                returnedAt: productsLog.pendingReturn === "true" ? null : undefined,
+                returningAt: productsLog.method === 'selling' ? null : undefined,
                 NOT: [
-                    { returningAt: pendingReturn ? null : undefined },
-                    { returnedAt: pendingReturn === "false" ? null : undefined }
+                    { returningAt: productsLog.pendingReturn ? null : undefined },
+                    { returnedAt: productsLog.pendingReturn === "false" ? null : undefined }
                 ]
             }
         });

@@ -1,21 +1,17 @@
 import { Request, Response } from "express";
-import { prisma } from "../prisma";
 import log from "../utils/logger";
 import { user } from '../service/user.service';
 import { product } from '../service/product.service';
 
-export const productController = (mock?: typeof prisma) => {
-    const database = mock || prisma;
-    const userService = user(database);
-    const service = product(database);
+export const productController = () => {
+    const userService = user();
+    const service = product();
 
     const list = async (req: Request, res: Response) => {
-        const type = req.query.type?.toString();
-        const title = req.query.title?.toString();
-        const method = req.query.method?.toString();
+        const {query: _product} = req;
     
         try {
-            const products = await service.list(type, title, method);
+            const products = await service.list(_product);
     
             if (!products || !products.length) {
     
@@ -31,15 +27,15 @@ export const productController = (mock?: typeof prisma) => {
     };
     
     const select = async (req: Request, res: Response) => {
-        const productId = parseInt(req.params.productId);
+        const {params: _product} = req;
     
-        if (!productId) {
+        if (!_product.productId || isNaN(parseInt(_product.productId))) {
     
             return res.status(406).send("Product ID can't be empty");
         }
     
         try {
-            const product = await service.select(productId);
+            const product = await service.select(_product);
             if (!product) {
     
                 return res.status(404).send("Product not found");
@@ -54,53 +50,48 @@ export const productController = (mock?: typeof prisma) => {
     };
     
     const create = async (req: Request, res: Response) => {
-        const usersId   = parseInt(req.body.usersId);
-        const type      = req.body.type?.toString();
-        const method    = req.body.method?.toString();
-        const inventory = parseInt(req.body.inventory);
-        const price     = Number(req.body.price);
-        const title     = req.body.title?.toString();
+        const {body: _product} = req;
     
         const allowedTypes   = process.env.ALLOWED_TYPES || ['books', 'movies', 'series'];
         const allowedMethods = process.env.ALLOWED_METHODS || ['renting', 'selling', 'both'];
     
-        if (!usersId) {
+        if (!_product.usersId || isNaN(parseInt(_product.usersId))) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
-        if (!type || !allowedTypes.includes(type)) {
+        if (!_product.type || !allowedTypes.includes(_product.type)) {
     
             return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
         }
     
-        if (!method || !allowedMethods.includes(method)) {
+        if (!_product.method || !allowedMethods.includes(_product.method)) {
     
             return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
         }
     
-        if (isNaN(inventory) || inventory < 0) {
+        if (isNaN(parseInt(_product.inventory)) || parseInt(_product.inventory) < 0) {
     
             return res.status(406).send(`Inventory should be greater than or equal to 0`);
         }
     
-        if (isNaN(price) || price <= 0) {
+        if (isNaN(parseInt(_product.price)) || parseInt(_product.price) <= 0) {
     
             return res.status(406).send(`Price should be greater than 0`);
         }
     
-        if (!title) {
+        if (!_product.title) {
     
             return res.status(406).send("Title can't be empty");
         }
     
         try {
-            if (!await userService.select(usersId)) {
+            if (!await userService.select(_product)) {
     
                 return res.status(404).send("User not found");
             }
     
-            const product = await service.create(usersId, type, title, method, inventory, price);
+            const product = await service.create(_product);
     
             return res.status(201).json({ product });
         } catch (e: any) {
@@ -111,64 +102,59 @@ export const productController = (mock?: typeof prisma) => {
     };
     
     const update = async (req: Request, res: Response) => {
-        const usersId   = parseInt(req.body.usersId);
-        const productId = parseInt(req.params.productId);
-        const type      = req.body.type?.toString();
-        const title     = req.body.title?.toString();
-        const method    = req.body.method?.toString();
-        const inventory = parseInt(req.body.inventory);
-        const price     = Number(req.body.price);
+        const {body, params} = req;
+        const _product = {usersId: parseInt(body.usersId), productId: parseInt(params.productId), type: body.type, title: body.title, method: body.method, inventory: parseInt(body.inventory), price: Number(body.price)};
     
         const allowedTypes   = process.env.ALLOWED_TYPES || ['books', 'movies', 'series'];
         const allowedMethods = process.env.ALLOWED_METHODS || ['renting', 'selling', 'both'];
     
-        if (!usersId) {
+        if (!_product.usersId) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
-        if (!productId) {
+        if (!_product.productId) {
     
             return res.status(406).send("Product ID can't be empty");
         }
     
-        if (!type || !allowedTypes.includes(type)) {
+        if (!_product.type || !allowedTypes.includes(_product.type)) {
     
             return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
         }
     
-        if (!method || !allowedMethods.includes(method)) {
+        if (!_product.method || !allowedMethods.includes(_product.method)) {
     
             return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
         }
     
-        if (isNaN(inventory) || inventory < 0) {
+        if (isNaN(_product.inventory) || _product.inventory < 0) {
     
             return res.status(406).send(`Inventory should be greater than or equal to 0`);
         }
     
-        if (isNaN(price) || price <= 0) {
+        if (isNaN(_product.price) || _product.price <= 0) {
     
             return res.status(406).send(`Price should be greater than 0`);
         }
     
-        if (!title) {
+        if (!_product.title) {
     
             return res.status(406).send("Name can't be empty");
         }
     
         try {
-            if (!await userService.select(usersId)) {
+            if (!await userService.select(_product)) {
     
                 return res.status(404).send("User not found");
             }
     
-            if (!await service.select(productId)) {
+            if (!await service.select(_product)) {
     
                 return res.status(404).send("Product not found");
             }
     
-            const product = await service.update(productId, usersId, type, title, method, inventory, price);
+            const product = await service.update(_product);
     
             return res.status(200).json({ product });
         } catch (e: any) {
@@ -179,31 +165,31 @@ export const productController = (mock?: typeof prisma) => {
     };
     
     const remove = async (req: Request, res: Response) => {
-        const productId = parseInt(req.params.productId);
-        const usersId   = parseInt(req.body.usersId);
+        const {body, params} = req;
+        const _product = {productId: parseInt(params.productId), usersId: parseInt(body.usersId)};
       
-        if (!productId) {
+        if (!_product.productId) {
     
             return res.status(406).send("Product ID can't be empty");
         }
     
-        if (!usersId) {
+        if (!_product.usersId) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
         try {
-            if (!await userService.select(usersId)) {
+            if (!await userService.select(_product)) {
     
                 return res.status(404).send("User not found");
             }
             
-            if (!await service.select(productId)) {
+            if (!await service.select(_product)) {
     
                 return res.status(404).send("Product not found");
             }
     
-            const product = await service.remove(productId, usersId);
+            const product = await service.remove(_product);
     
             return res.status(200).json({ product });
         } catch (e: any) {

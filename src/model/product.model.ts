@@ -6,14 +6,16 @@ export interface Product {
     method?    : string;
     inventory? : number;
     price?     : number;
+    productId? : number;
+    productsId? : number;
 }
 
 export interface ProductCreate {
-    id?        : number;
-    usersId?   : number;
-    type?      : string;
-    title?     : string;
-    method?    : string;
-    inventory? : number;
-    price?     : number;
+    usersId    : number;
+    type       : string;
+    title      : string;
+    method     : string;
+    inventory  : number;
+    price      : number;
+    productId? : number;
 }

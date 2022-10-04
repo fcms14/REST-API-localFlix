@@ -1,46 +1,45 @@
 import { prisma } from "../prisma";
+import { User, UserCreate } from "../model/user.model";
 
 export const user = (mock?: typeof prisma) => {
     const database = mock || prisma;
 
-    const list = async (name?: string) => {
+    const list = async (user?: User) => {
         return await database.users.findMany({
             where: {
                 name: {
-                    contains: name,
+                    contains: user?.name,
                 }
             }
         });
     };
     
-    const select = async (userId: number) => {
-        return await database.users.findUnique({ where: { id: userId } });
+    const select = async (user: User) => {
+        return await database.users.findUnique({ where: { id: Number(user.userId) || Number(user.usersId)  } });
     };
     
-    const create = async (name: string) => {
+    const create = async (user: UserCreate) => {
         return await database.users.create({
-            data: {
-                name
-            }
+            data: user
         });
     };
     
-    const update = async (userId: number, name: string) => {
+    const update = async (user: UserCreate) => {
         return await database.users.update({
             where: {
-                id: userId,
+                id: user.userId,
             },
             data: {
-                name,
+                name: user.name,
                 updatedAt: new Date()
             }
         });
     };
     
-    const remove = async (userId: number) => {
+    const remove = async (user: User) => {
         return await database.users.update({
             where: {
-                id: userId,
+                id: Number(user.userId),
             },
             data: {
                 deletedAt: new Date()

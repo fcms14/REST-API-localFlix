@@ -3,7 +3,7 @@ import log from "../utils/logger";
 import { user } from '../service/user.service';
 import { customer } from '../service/customer.service';
 
-export const customerController = (mock?:{}) => {
+export const customerController = () => {
     const userService = user();
     const service = customer();
     
@@ -63,7 +63,7 @@ export const customerController = (mock?:{}) => {
         }
     
         try {
-            if (!!_customer.usersId && !await userService.select(_customer.usersId)) {
+            if (!!_customer.usersId && !await userService.select(_customer)) {
     
                 return res.status(404).send("User not found");
             }
@@ -98,7 +98,7 @@ export const customerController = (mock?:{}) => {
         }
     
         try {
-            if (!!_customer.usersId && !await userService.select(_customer.usersId)) {
+            if (!!_customer.usersId && !await userService.select(_customer)) {
     
                 return res.status(404).send("User not found");
             }
@@ -133,7 +133,7 @@ export const customerController = (mock?:{}) => {
         }
     
         try {
-            if (!!_customer.usersId && !await userService.select(_customer.usersId)) {
+            if (!!_customer.usersId && !await userService.select(_customer)) {
     
                 return res.status(404).send("User not found");
             }

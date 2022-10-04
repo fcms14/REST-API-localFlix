@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">59.44% </span>
+                <span class="strong">57.63% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>129/217</span>
+                <span class='fraction'>117/203</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.31% </span>
+                <span class="strong">82.97% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>43/51</span>
+                <span class='fraction'>39/47</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">59.44% </span>
+                <span class="strong">57.63% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>129/217</span>
+                <span class='fraction'>117/203</span>
             </div>
         
             
@@ -266,21 +266,7 @@
 <a name='L201'></a><a href='#L201'>201</a>
 <a name='L202'></a><a href='#L202'>202</a>
 <a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a>
-<a name='L205'></a><a href='#L205'>205</a>
-<a name='L206'></a><a href='#L206'>206</a>
-<a name='L207'></a><a href='#L207'>207</a>
-<a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a>
-<a name='L210'></a><a href='#L210'>210</a>
-<a name='L211'></a><a href='#L211'>211</a>
-<a name='L212'></a><a href='#L212'>212</a>
-<a name='L213'></a><a href='#L213'>213</a>
-<a name='L214'></a><a href='#L214'>214</a>
-<a name='L215'></a><a href='#L215'>215</a>
-<a name='L216'></a><a href='#L216'>216</a>
-<a name='L217'></a><a href='#L217'>217</a>
-<a name='L218'></a><a href='#L218'>218</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -290,10 +276,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -336,11 +318,6 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">13x</span>
@@ -393,11 +370,6 @@
 <span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
@@ -498,23 +470,19 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
-import { prisma } from "../prisma";
 import log from "../utils/logger";
 import { user } from '../service/user.service';
 import { product } from '../service/product.service';
 &nbsp;
-export const productController = (mock?: typeof prisma) =&gt; {
-    const database = mock || prisma;
-    const userService = user(database);
-    const service = product(database);
+export const productController = () =&gt; {
+    const userService = user();
+    const service = product();
 &nbsp;
     const list = <span class="fstat-no" title="function not covered" >async (req: Request, res: Response) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        const type = req.query.type?.toString();</span>
-<span class="cstat-no" title="statement not covered" >        const title = req.query.title?.toString();</span>
-<span class="cstat-no" title="statement not covered" >        const method = req.query.method?.toString();</span>
+<span class="cstat-no" title="statement not covered" >        const {query: _product} = req;</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const products = await service.list(type, title, method);</span>
+<span class="cstat-no" title="statement not covered" >            const products = await service.list(_product);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            if (!products || !products.length) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
@@ -530,15 +498,15 @@ export const productController = (mock?: typeof prisma) =&gt; {
 <span class="cstat-no" title="statement not covered" >    };</span>
     
     const select = async (req: Request, res: Response) =&gt; {
-        const productId = parseInt(req.params.productId);
+        const {params: _product} = req;
     
-        if (!productId) {
+        if (!_product.productId || isNaN(parseInt(_product.productId))) {
     
             return res.status(406).send("Product ID can't be empty");
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const product = await service.select(productId);</span>
+<span class="cstat-no" title="statement not covered" >            const product = await service.select(_product);</span>
 <span class="cstat-no" title="statement not covered" >            if (!product) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("Product not found");</span>
@@ -553,53 +521,48 @@ export const productController = (mock?: typeof prisma) =&gt; {
     };
     
     const create = async (req: Request, res: Response) =&gt; {
-        const usersId   = parseInt(req.body.usersId);
-        const type      = req.body.type?.toString();
-        const method    = req.body.method?.toString();
-        const inventory = parseInt(req.body.inventory);
-        const price     = Number(req.body.price);
-        const title     = req.body.title?.toString();
+        const {body: _product} = req;
     
         const allowedTypes   = process.env.ALLOWED_TYPES<span class="branch-0 cbranch-no" title="branch not covered" > || ['books', 'movies', 'series'];</span>
         const allowedMethods = process.env.ALLOWED_METHODS<span class="branch-0 cbranch-no" title="branch not covered" > || ['renting', 'selling', 'both'];</span>
     
-        if (!usersId) {
+        if (!_product.usersId || isNaN(parseInt(_product.usersId))) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
-        if (!type || !allowedTypes.includes(type)) {
+        if (!_product.type || !allowedTypes.includes(_product.type)) {
     
             return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
         }
     
-        if (!method || !allowedMethods.includes(method)) {
+        if (!_product.method || !allowedMethods.includes(_product.method)) {
     
             return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
         }
     
-        if (isNaN(inventory) || inventory &lt; 0) {
+        if (isNaN(parseInt(_product.inventory)) || parseInt(_product.inventory) &lt; 0) {
     
             return res.status(406).send(`Inventory should be greater than or equal to 0`);
         }
     
-        if (isNaN(price) || price &lt;= 0) {
+        if (isNaN(parseInt(_product.price)) || parseInt(_product.price) &lt;= 0) {
     
             return res.status(406).send(`Price should be greater than 0`);
         }
     
-        if (!title) {
+        if (!_product.title) {
     
             return res.status(406).send("Title can't be empty");
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(_product)) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            const product = await service.create(usersId, type, title, method, inventory, price);</span>
+<span class="cstat-no" title="statement not covered" >            const product = await service.create(_product);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(201).json({ product });</span>
 <span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
@@ -610,64 +573,59 @@ export const productController = (mock?: typeof prisma) =&gt; {
     };
     
     const update = async (req: Request, res: Response) =&gt; {
-        const usersId   = parseInt(req.body.usersId);
-        const productId = parseInt(req.params.productId);
-        const type      = req.body.type?.toString();
-        const title     = req.body.title?.toString();
-        const method    = req.body.method?.toString();
-        const inventory = parseInt(req.body.inventory);
-        const price     = Number(req.body.price);
+        const {body, params} = req;
+        const _product = {usersId: parseInt(body.usersId), productId: parseInt(params.productId), type: body.type, title: body.title, method: body.method, inventory: parseInt(body.inventory), price: Number(body.price)};
     
         const allowedTypes   = process.env.ALLOWED_TYPES<span class="branch-0 cbranch-no" title="branch not covered" > || ['books', 'movies', 'series'];</span>
         const allowedMethods = process.env.ALLOWED_METHODS<span class="branch-0 cbranch-no" title="branch not covered" > || ['renting', 'selling', 'both'];</span>
     
-        if (!usersId) {
+        if (!_product.usersId) {
     
             return res.status(406).send("User ID can't be empty");
         }
     
-        if (!productId) {
+        if (!_product.productId) {
     
             return res.status(406).send("Product ID can't be empty");
         }
     
-        if (!type || !allowedTypes.includes(type)) {
+        if (!_product.type || !allowedTypes.includes(_product.type)) {
     
             return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
         }
     
-        if (!method || !allowedMethods.includes(method)) {
+        if (!_product.method || !allowedMethods.includes(_product.method)) {
     
             return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
         }
     
-        if (isNaN(inventory) || inventory &lt; 0) {
+        if (isNaN(_product.inventory) || _product.inventory &lt; 0) {
     
             return res.status(406).send(`Inventory should be greater than or equal to 0`);
         }
     
-        if (isNaN(price) || price &lt;= 0) {
+        if (isNaN(_product.price) || _product.price &lt;= 0) {
     
             return res.status(406).send(`Price should be greater than 0`);
         }
     
-        if (!title) {
+        if (!_product.title) {
     
             return res.status(406).send("Name can't be empty");
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(_product)) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            if (!await service.select(productId)) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await service.select(_product)) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("Product not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            const product = await service.update(productId, usersId, type, title, method, inventory, price);</span>
+<span class="cstat-no" title="statement not covered" >            const product = await service.update(_product);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(200).json({ product });</span>
 <span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
@@ -678,31 +636,31 @@ export const productController = (mock?: typeof prisma) =&gt; {
     };
     
     const remove = async (req: Request, res: Response) =&gt; {
-        const productId = parseInt(req.params.productId);
-        const usersId   = parseInt(req.body.usersId);
+        const {body, params} = req;
+        const _product = {productId: parseInt(params.productId), usersId: parseInt(body.usersId)};
       
-        if (!productId) {
+        if (!_product.productId) {
     
             return res.status(406).send("Product ID can't be empty");
         }
     
-        if (!usersId) {
+        if (!_product.usersId) {
     
             return res.status(406).send("User ID can't be empty");
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
 <span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(_product)) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >            </span>
-<span class="cstat-no" title="statement not covered" >            if (!await service.select(productId)) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await service.select(_product)) {</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("Product not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            const product = await service.remove(productId, usersId);</span>
+<span class="cstat-no" title="statement not covered" >            const product = await service.remove(_product);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(200).json({ product });</span>
 <span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
@@ -721,7 +679,7 @@ export const productController = (mock?: typeof prisma) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T14:36:19.848Z
+                at 2022-10-04T17:02:50.598Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
