@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40.76% </span>
+                <span class="strong">45.56% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>64/157</span>
+                <span class='fraction'>72/158</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65% </span>
+                <span class="strong">61.53% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/20</span>
+                <span class='fraction'>16/26</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40.76% </span>
+                <span class="strong">45.56% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>64/157</span>
+                <span class='fraction'>72/158</span>
             </div>
         
             
@@ -220,7 +220,8 @@
 <a name='L155'></a><a href='#L155'>155</a>
 <a name='L156'></a><a href='#L156'>156</a>
 <a name='L157'></a><a href='#L157'>157</a>
-<a name='L158'></a><a href='#L158'>158</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -249,27 +250,28 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -382,9 +384,9 @@ import log from "../utils/logger";
 import { user } from '../service/user.service';
 import { customer } from '../service/customer.service';
 &nbsp;
-export const customerController = () =&gt; {
-    const userService = user();
-    const service = customer();
+export const customerController = (mockService?: any) =&gt; {
+    const userService =  <span class="branch-0 cbranch-no" title="branch not covered" >mockService || user();</span>
+    const service     =  <span class="branch-0 cbranch-no" title="branch not covered" >mockService || customer();</span>
     
     const list = <span class="fstat-no" title="function not covered" >async (req: Request, res: Response) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        const {query: _customer} = req;</span>
@@ -412,16 +414,17 @@ export const customerController = () =&gt; {
     
             return res.status(406).send("Customer ID can't be empty");
         }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
-<span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const customer = await service.select(_customer);</span>
-<span class="cstat-no" title="statement not covered" >            if (!customer) {</span>
+    
+        try {
+&nbsp;
+            const customer = await service.select(_customer);
+            if (!customer) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("Customer not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ customer });</span>
-<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+    
+            return res.status(200).json({ customer });
+        } <span class="branch-0 cbranch-no" title="branch not covered" >catch (e: any) {</span>
 <span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
 <span class="cstat-no" title="statement not covered" >            </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
@@ -541,7 +544,7 @@ export const customerController = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:50.598Z
+                at 2022-10-04T17:43:43.118Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

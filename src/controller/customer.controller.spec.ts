@@ -1,20 +1,12 @@
 import { Request } from 'express';
 import { createResponse, createRequest } from 'node-mocks-http';
 import { customerController } from './customer.controller';
+import { mockService } from '../model/services.model';
 
-const mockService = () => {
-    const list    = () => {};
-    const select  = () => {};
-    const create  = () => {};
-    const update  = () => {};
-    const remove  = () => {};
-
-    return { list, select, create, update, remove };
-};
-
-const controller = customerController();
+const controller = customerController(mockService());
 
 describe('selectCustomer', () => {
+
     it('should not be able to select a customer with empty customerId', async () => {
         const request  = createRequest({ method: 'GET', params: { customerId: '' } });
         expect((await controller.select(request, createResponse())).statusCode).toBe(406);
@@ -23,6 +15,11 @@ describe('selectCustomer', () => {
     it('should not be able to select a customer with customerId as a string', async () => {
         const request  = createRequest({ method: 'GET', params: { customerId: 'a' } });
         expect((await controller.select(request, createResponse())).statusCode).toBe(406);
+    });
+
+    it('should be able to select a customer with customerId = 1', async () => {
+        const request  = createRequest({ method: 'GET', params: { customerId: 1 } });
+        expect((await controller.select(request, createResponse())).statusCode).toBe(200);
     });
 });
 
@@ -69,5 +66,3 @@ describe('deleteCustomer', () => {
         expect((await controller.remove(request, createResponse())).statusCode).toBe(406);
     });
 });
-
-// "usersId": 1,

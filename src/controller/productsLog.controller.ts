@@ -5,7 +5,7 @@ import { product } from '../service/product.service';
 import { customer } from '../service/customer.service';
 import { transaction } from '../service/productsLog.service';
 
-export const transactionController = () => {
+export const transactionController = (mockService?: any) => {
     const userService = user();
     const productService = product();
     const customerService = customer();

@@ -1,8 +1,9 @@
 import { Request } from 'express';
 import { createResponse, createRequest } from 'node-mocks-http';
 import { productController } from './product.controller';
+import { mockService } from '../model/services.model';
 
-const controller = productController();
+const controller = productController(mockService());
 
 describe('selectProduct', () => {
     it('should not be able to select a product with empty productId', async () => {
@@ -13,6 +14,11 @@ describe('selectProduct', () => {
     it('should not be able to select a product with productId as a string', async () => {
         const request  = createRequest({ method: 'GET', params: { productId: 'a'}});
         expect((await controller.select(request, createResponse())).statusCode).toBe(406);
+    });
+
+    it('should not be able to select a product with productId = 1', async () => {
+        const request  = createRequest({ method: 'GET', params: { productId: 1}});
+        expect((await controller.select(request, createResponse())).statusCode).toBe(200);
     });
 });
 

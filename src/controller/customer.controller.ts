@@ -3,9 +3,9 @@ import log from "../utils/logger";
 import { user } from '../service/user.service';
 import { customer } from '../service/customer.service';
 
-export const customerController = () => {
-    const userService = user();
-    const service = customer();
+export const customerController = (mockService?: any) => {
+    const userService =  mockService || user();
+    const service     =  mockService || customer();
     
     const list = async (req: Request, res: Response) => {
         const {query: _customer} = req;
@@ -35,6 +35,7 @@ export const customerController = () => {
         }
     
         try {
+
             const customer = await service.select(_customer);
             if (!customer) {
     

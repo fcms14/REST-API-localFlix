@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import log from "../utils/logger";
 import { user } from '../service/user.service';
 
-export const userController = () => {
+export const userController = (mockService?: any) => {
     const service = user();
 
     const list = async (req: Request, res: Response) => {

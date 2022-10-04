@@ -1,8 +1,9 @@
 import { Request } from 'express';
 import { createResponse, createRequest } from 'node-mocks-http';
 import { userController } from './user.controller';
+import { mockService } from '../model/services.model';
 
-const controller = userController();
+const controller = userController(mockService());
 
 describe('selectUser', () => {
     it('should not be able to select a user with empty userId', async () => {
@@ -13,6 +14,11 @@ describe('selectUser', () => {
     it('should not be able to select a user with userId as a string', async () => {
         const request  = createRequest({ method: 'GET', params: { userId: 'a' } });
         expect((await controller.select(request, createResponse())).statusCode).toBe(406);
+    });
+
+    it('should be able to select a user with userId = 1', async () => {
+        const request  = createRequest({ method: 'GET', params: { userId: 1 } });
+        expect((await controller.select(request, createResponse())).statusCode).toBe(200);
     });
 });
 

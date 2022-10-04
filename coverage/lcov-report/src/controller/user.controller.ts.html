@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.74% </span>
+                <span class="strong">48.38% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>53/124</span>
+                <span class='fraction'>60/124</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.33% </span>
+                <span class="strong">73.68% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/15</span>
+                <span class='fraction'>14/19</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.74% </span>
+                <span class="strong">48.38% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>53/124</span>
+                <span class='fraction'>60/124</span>
             </div>
         
             
@@ -214,27 +214,27 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -315,7 +315,7 @@
 import log from "../utils/logger";
 import { user } from '../service/user.service';
 &nbsp;
-export const userController = () =&gt; {
+export const userController = (mockService?: any) =&gt; {
     const service = user();
 &nbsp;
     const list = <span class="fstat-no" title="function not covered" >async (req: Request, res: Response) =&gt; {</span>
@@ -344,16 +344,16 @@ export const userController = () =&gt; {
     
             return res.status(406).send("User ID can't be empty");
         }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
-<span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const user = await service.select(_user);</span>
-<span class="cstat-no" title="statement not covered" >            if (!user) {</span>
+    
+        try {
+            const user = await service.select(_user);
+            if (!user) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ user });</span>
-<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+    
+            return res.status(200).json({ user });
+        } <span class="branch-0 cbranch-no" title="branch not covered" >catch (e: any) {</span>
 <span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
 <span class="cstat-no" title="statement not covered" >            </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
@@ -442,7 +442,7 @@ export const userController = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:50.598Z
+                at 2022-10-04T17:43:43.118Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

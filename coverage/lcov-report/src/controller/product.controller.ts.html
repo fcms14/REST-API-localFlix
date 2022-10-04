@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.63% </span>
+                <span class="strong">61.08% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>117/203</span>
+                <span class='fraction'>124/203</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.97% </span>
+                <span class="strong">82.35% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>39/47</span>
+                <span class='fraction'>42/51</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.63% </span>
+                <span class="strong">61.08% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>117/203</span>
+                <span class='fraction'>124/203</span>
             </div>
         
             
@@ -295,27 +295,27 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">13x</span>
@@ -474,7 +474,7 @@ import log from "../utils/logger";
 import { user } from '../service/user.service';
 import { product } from '../service/product.service';
 &nbsp;
-export const productController = () =&gt; {
+export const productController = (mockService?: any) =&gt; {
     const userService = user();
     const service = product();
 &nbsp;
@@ -504,16 +504,16 @@ export const productController = () =&gt; {
     
             return res.status(406).send("Product ID can't be empty");
         }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
-<span class="cstat-no" title="statement not covered" >        try {</span>
-<span class="cstat-no" title="statement not covered" >            const product = await service.select(_product);</span>
-<span class="cstat-no" title="statement not covered" >            if (!product) {</span>
+    
+        try {
+            const product = await service.select(_product);
+            if (!product) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("Product not found");</span>
 <span class="cstat-no" title="statement not covered" >            }</span>
-<span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ product });</span>
-<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+    
+            return res.status(200).json({ product });
+        } <span class="branch-0 cbranch-no" title="branch not covered" >catch (e: any) {</span>
 <span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
 <span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
@@ -679,7 +679,7 @@ export const productController = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-04T17:02:50.598Z
+                at 2022-10-04T17:43:43.118Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

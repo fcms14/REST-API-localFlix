@@ -3,7 +3,7 @@ import log from "../utils/logger";
 import { user } from '../service/user.service';
 import { product } from '../service/product.service';
 
-export const productController = () => {
+export const productController = (mockService?: any) => {
     const userService = user();
     const service = product();
 
