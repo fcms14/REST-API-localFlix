@@ -1,9 +1,9 @@
-export interface Customer {
+export interface User {
     id?:   number;
     name?: string;
 }
 
-export interface CustomerCreate {
+export interface UserCreate {
     id?:  number;
     name: string;
 }

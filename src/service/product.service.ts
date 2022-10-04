@@ -1,4 +1,5 @@
 import { prisma } from "../prisma";
+import { Product, ProductCreate } from "../model/product.model";
 
 export const product = (mock?: typeof prisma) => {
     const database = mock || prisma;

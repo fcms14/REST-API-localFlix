@@ -1,4 +1,4 @@
-export interface Customer {
+export interface Product {
     id?        : number;
     usersId?   : number;
     type?      : string;
@@ -8,7 +8,7 @@ export interface Customer {
     price?     : number;
 }
 
-export interface CustomerCreate {
+export interface ProductCreate {
     id?        : number;
     usersId?   : number;
     type?      : string;
