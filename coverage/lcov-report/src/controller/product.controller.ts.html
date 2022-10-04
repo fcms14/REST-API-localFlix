@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.69% </span>
+                <span class="strong">59.44% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>120/208</span>
+                <span class='fraction'>129/217</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.67% </span>
+                <span class="strong">84.31% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>41/49</span>
+                <span class='fraction'>43/51</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>6/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.69% </span>
+                <span class="strong">59.44% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>120/208</span>
+                <span class='fraction'>129/217</span>
             </div>
         
             
@@ -271,7 +271,22 @@
 <a name='L206'></a><a href='#L206'>206</a>
 <a name='L207'></a><a href='#L207'>207</a>
 <a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -479,213 +494,225 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
+import { prisma } from "../prisma";
 import log from "../utils/logger";
-import { selectUserService } from '../service/user.service';
-import { createProductService, deleteProductService, updateProductService, selectProductService, listProductService } from '../service/product.service';
+import { user } from '../service/user.service';
+import { product } from '../service/product.service';
 &nbsp;
-export <span class="fstat-no" title="function not covered" >async function listProduct(req: Request, res: Response) {</span>
-<span class="cstat-no" title="statement not covered" >    const type = req.query.type?.toString();</span>
-<span class="cstat-no" title="statement not covered" >    const title = req.query.title?.toString();</span>
-<span class="cstat-no" title="statement not covered" >    const method = req.query.method?.toString();</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        const products = await listProductService(type, title, method);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        if (!products || !products.length) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Products not found");</span>
+export const productController = (mock?: typeof prisma) =&gt; {
+    const database = mock || prisma;
+    const userService = user(database);
+    const service = product(database);
+&nbsp;
+    const list = <span class="fstat-no" title="function not covered" >async (req: Request, res: Response) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const type = req.query.type?.toString();</span>
+<span class="cstat-no" title="statement not covered" >        const title = req.query.title?.toString();</span>
+<span class="cstat-no" title="statement not covered" >        const method = req.query.method?.toString();</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            const products = await service.list(type, title, method);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            if (!products || !products.length) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("Products not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ products });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ products });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;
-export async function selectProduct(req: Request, res: Response) {
-    const productId = parseInt(req.params.productId);
-&nbsp;
-    if (!productId) {
-&nbsp;
-        return res.status(406).send("Product ID can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        const product = await selectProductService(productId);</span>
-<span class="cstat-no" title="statement not covered" >        if (!product) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Product not found");</span>
+<span class="cstat-no" title="statement not covered" >    };</span>
+    
+    const select = async (req: Request, res: Response) =&gt; {
+        const productId = parseInt(req.params.productId);
+    
+        if (!productId) {
+    
+            return res.status(406).send("Product ID can't be empty");
+        }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            const product = await service.select(productId);</span>
+<span class="cstat-no" title="statement not covered" >            if (!product) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("Product not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ product });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ product });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-}
-&nbsp;
-export async function createProduct(req: Request, res: Response) {
-    const usersId   = parseInt(req.body.usersId);
-    const type      = req.body.type?.toString();
-    const method    = req.body.method?.toString();
-    const inventory = parseInt(req.body.inventory);
-    const price     = Number(req.body.price);
-    const title     = req.body.title?.toString();
-&nbsp;
-    const allowedTypes   = process.env.ALLOWED_TYPES<span class="branch-0 cbranch-no" title="branch not covered" > || ['books', 'movies', 'series'];</span>
-    const allowedMethods = process.env.ALLOWED_METHODS<span class="branch-0 cbranch-no" title="branch not covered" > || ['renting', 'selling', 'both'];</span>
-&nbsp;
-    if (!usersId) {
-&nbsp;
-        return res.status(406).send("User ID can't be empty");
-    }
-&nbsp;
-    if (!type || !allowedTypes.includes(type)) {
-&nbsp;
-        return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
-    }
-&nbsp;
-    if (!method || !allowedMethods.includes(method)) {
-&nbsp;
-        return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
-    }
-&nbsp;
-    if (isNaN(inventory) || inventory &lt; 0) {
-&nbsp;
-        return res.status(406).send(`Inventory should be greater than or equal to 0`);
-    }
-&nbsp;
-    if (isNaN(price) || price &lt;= 0) {
-&nbsp;
-        return res.status(406).send(`Price should be greater than 0`);
-    }
-&nbsp;
-    if (!title) {
-&nbsp;
-        return res.status(406).send("Title can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
+    };
+    
+    const create = async (req: Request, res: Response) =&gt; {
+        const usersId   = parseInt(req.body.usersId);
+        const type      = req.body.type?.toString();
+        const method    = req.body.method?.toString();
+        const inventory = parseInt(req.body.inventory);
+        const price     = Number(req.body.price);
+        const title     = req.body.title?.toString();
+    
+        const allowedTypes   = process.env.ALLOWED_TYPES<span class="branch-0 cbranch-no" title="branch not covered" > || ['books', 'movies', 'series'];</span>
+        const allowedMethods = process.env.ALLOWED_METHODS<span class="branch-0 cbranch-no" title="branch not covered" > || ['renting', 'selling', 'both'];</span>
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
+        }
+    
+        if (!type || !allowedTypes.includes(type)) {
+    
+            return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
+        }
+    
+        if (!method || !allowedMethods.includes(method)) {
+    
+            return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
+        }
+    
+        if (isNaN(inventory) || inventory &lt; 0) {
+    
+            return res.status(406).send(`Inventory should be greater than or equal to 0`);
+        }
+    
+        if (isNaN(price) || price &lt;= 0) {
+    
+            return res.status(406).send(`Price should be greater than 0`);
+        }
+    
+        if (!title) {
+    
+            return res.status(406).send("Title can't be empty");
+        }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            const product = await service.create(usersId, type, title, method, inventory, price);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(201).json({ product });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const product = await createProductService(usersId, type, title, method, inventory, price);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(201).json({ product });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-}
-&nbsp;
-export async function updateProduct(req: Request, res: Response) {
-    const usersId   = parseInt(req.body.usersId);
-    const productId = parseInt(req.params.productId);
-    const type      = req.body.type?.toString();
-    const title     = req.body.title?.toString();
-    const method    = req.body.method?.toString();
-    const inventory = parseInt(req.body.inventory);
-    const price     = Number(req.body.price);
-&nbsp;
-    const allowedTypes   = process.env.ALLOWED_TYPES<span class="branch-0 cbranch-no" title="branch not covered" > || ['books', 'movies', 'series'];</span>
-    const allowedMethods = process.env.ALLOWED_METHODS<span class="branch-0 cbranch-no" title="branch not covered" > || ['renting', 'selling', 'both'];</span>
-&nbsp;
-    if (!usersId) {
-&nbsp;
-        return res.status(406).send("User ID can't be empty");
-    }
-&nbsp;
-    if (!productId) {
-&nbsp;
-        return res.status(406).send("Product ID can't be empty");
-    }
-&nbsp;
-    if (!type || !allowedTypes.includes(type)) {
-&nbsp;
-        return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
-    }
-&nbsp;
-    if (!method || !allowedMethods.includes(method)) {
-&nbsp;
-        return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
-    }
-&nbsp;
-    if (isNaN(inventory) || inventory &lt; 0) {
-&nbsp;
-        return res.status(406).send(`Inventory should be greater than or equal to 0`);
-    }
-&nbsp;
-    if (isNaN(price) || price &lt;= 0) {
-&nbsp;
-        return res.status(406).send(`Price should be greater than 0`);
-    }
-&nbsp;
-    if (!title) {
-&nbsp;
-        return res.status(406).send("Name can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
+    };
+    
+    const update = async (req: Request, res: Response) =&gt; {
+        const usersId   = parseInt(req.body.usersId);
+        const productId = parseInt(req.params.productId);
+        const type      = req.body.type?.toString();
+        const title     = req.body.title?.toString();
+        const method    = req.body.method?.toString();
+        const inventory = parseInt(req.body.inventory);
+        const price     = Number(req.body.price);
+    
+        const allowedTypes   = process.env.ALLOWED_TYPES<span class="branch-0 cbranch-no" title="branch not covered" > || ['books', 'movies', 'series'];</span>
+        const allowedMethods = process.env.ALLOWED_METHODS<span class="branch-0 cbranch-no" title="branch not covered" > || ['renting', 'selling', 'both'];</span>
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
+        }
+    
+        if (!productId) {
+    
+            return res.status(406).send("Product ID can't be empty");
+        }
+    
+        if (!type || !allowedTypes.includes(type)) {
+    
+            return res.status(406).send(`Only the following types are allowed: ${allowedTypes}`);
+        }
+    
+        if (!method || !allowedMethods.includes(method)) {
+    
+            return res.status(406).send(`Only the following methods are allowed: ${allowedMethods}`);
+        }
+    
+        if (isNaN(inventory) || inventory &lt; 0) {
+    
+            return res.status(406).send(`Inventory should be greater than or equal to 0`);
+        }
+    
+        if (isNaN(price) || price &lt;= 0) {
+    
+            return res.status(406).send(`Price should be greater than 0`);
+        }
+    
+        if (!title) {
+    
+            return res.status(406).send("Name can't be empty");
+        }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            if (!await service.select(productId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("Product not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            const product = await service.update(productId, usersId, type, title, method, inventory, price);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ product });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectProductService(productId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Product not found");</span>
+    };
+    
+    const remove = async (req: Request, res: Response) =&gt; {
+        const productId = parseInt(req.params.productId);
+        const usersId   = parseInt(req.body.usersId);
+      
+        if (!productId) {
+    
+            return res.status(406).send("Product ID can't be empty");
+        }
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
+        }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >            </span>
+<span class="cstat-no" title="statement not covered" >            if (!await service.select(productId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("Product not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            const product = await service.remove(productId, usersId);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ product });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const product = await updateProductService(productId, usersId, type, title, method, inventory, price);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ product });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-}
+    };
 &nbsp;
-export async function deleteProduct(req: Request, res: Response) {
-    const productId = parseInt(req.params.productId);
-    const usersId   = parseInt(req.body.usersId);
-  
-    if (!productId) {
-&nbsp;
-        return res.status(406).send("Product ID can't be empty");
-    }
-&nbsp;
-    if (!usersId) {
-&nbsp;
-        return res.status(406).send("User ID can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectProductService(productId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Product not found");</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const product = await deleteProductService(productId, usersId);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ product });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    return { list, select, create, update, remove };
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -694,7 +721,7 @@ export async function deleteProduct(req: Request, res: Response) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-03T16:28:45.357Z
+                at 2022-10-04T11:57:55.966Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

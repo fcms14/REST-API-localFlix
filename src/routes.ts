@@ -1,42 +1,51 @@
 import express from 'express';
-import { createUser, deleteUser, updateUser, selectUser, listUser } from './controller/user.controller';
-import { createCustomer, deleteCustomer, updateCustomer, selectCustomer, listCustomer } from './controller/customer.controller';
-import { createProduct, deleteProduct, updateProduct, selectProduct, listProduct } from './controller/product.controller';
-import { createProductsLog, returningProductsLog, listProductsLog } from './controller/productsLog.controller';
+
+import { userController } from './controller/user.controller';
+import { customerController } from './controller/customer.controller';
+
+import { productController } from './controller/product.controller';
+
+import { transactionController } from './controller/productsLog.controller';
+
 import { ensureCompanyAuthenticated } from "./middleware/company.middleware";
 import { ensureCustomerAuthenticated } from "./middleware/customer.middleware";
 
 export const routes = express.Router();
 
-routes.get("/api/user", ensureCompanyAuthenticated, listUser);
-routes.post("/api/user", createUser);
-routes.get("/api/user/:userId", ensureCompanyAuthenticated, selectUser);
-routes.put("/api/user/:userId", ensureCompanyAuthenticated, updateUser);
-routes.delete("/api/user/:userId", ensureCompanyAuthenticated, deleteUser);
+const user = userController();
+const customer = customerController();
+const product = productController();
+const transaction = transactionController();
 
-routes.get("/api/customer", ensureCompanyAuthenticated, listCustomer);
-routes.post("/api/customer", createCustomer);
-routes.get("/api/customer/:customerId", ensureCompanyAuthenticated, selectCustomer);
-routes.put("/api/customer/:customerId", ensureCompanyAuthenticated, updateCustomer);
-routes.delete("/api/customer/:customerId", ensureCompanyAuthenticated, deleteCustomer);
+routes.get("/api/user", ensureCompanyAuthenticated, user.list);
+routes.post("/api/user", user.create);
+routes.get("/api/user/:userId", ensureCompanyAuthenticated, user.select);
+routes.put("/api/user/:userId", ensureCompanyAuthenticated, user.update);
+routes.delete("/api/user/:userId", ensureCompanyAuthenticated, user.remove);
 
-routes.get("/api/product", listProduct);
-routes.post("/api/product", ensureCompanyAuthenticated, createProduct);
-routes.get("/api/product/:productId", selectProduct);
-routes.put("/api/product/:productId", ensureCompanyAuthenticated, updateProduct);
-routes.delete("/api/product/:productId", ensureCompanyAuthenticated, deleteProduct);
+routes.get("/api/customer", ensureCompanyAuthenticated, customer.list);
+routes.post("/api/customer", customer.create);
+routes.get("/api/customer/:customerId", ensureCompanyAuthenticated, customer.select);
+routes.put("/api/customer/:customerId", ensureCompanyAuthenticated, customer.update);
+routes.delete("/api/customer/:customerId", ensureCompanyAuthenticated, customer.remove);
 
-routes.get("/api/transactions", ensureCompanyAuthenticated, listProductsLog);
-routes.post("/api/transactions", ensureCompanyAuthenticated, createProductsLog);
-routes.put("/api/transactions", ensureCompanyAuthenticated, returningProductsLog);
+routes.get("/api/product", product.list);
+routes.post("/api/product", ensureCompanyAuthenticated, product.create);
+routes.get("/api/product/:productId", product.select);
+routes.put("/api/product/:productId", ensureCompanyAuthenticated, product.update);
+routes.delete("/api/product/:productId", ensureCompanyAuthenticated, product.remove);
 
-routes.post("/public/api/customer", createCustomer);
-routes.get("/public/api/customer/:customerId", ensureCustomerAuthenticated, selectCustomer);
-routes.put("/public/api/customer/:customerId", ensureCustomerAuthenticated, updateCustomer);
-routes.delete("/public/api/customer/:customerId", ensureCustomerAuthenticated, deleteCustomer);
+routes.get("/api/transactions", ensureCompanyAuthenticated, transaction.list);
+routes.post("/api/transactions", ensureCompanyAuthenticated, transaction.create);
+routes.put("/api/transactions", ensureCompanyAuthenticated, transaction.returning);
 
-routes.get("/public/api/product", listProduct);
-routes.get("/public/api/product/:productId", selectProduct);
+routes.post("/public/api/customer", customer.create);
+routes.get("/public/api/customer/:customerId", ensureCustomerAuthenticated, customer.select);
+routes.put("/public/api/customer/:customerId", ensureCustomerAuthenticated, customer.update);
+routes.delete("/public/api/customer/:customerId", ensureCustomerAuthenticated, customer.remove);
 
-routes.post("/public/api/transactions", ensureCustomerAuthenticated, createProductsLog);
-routes.put("/public/api/transactions", ensureCustomerAuthenticated, returningProductsLog);
+routes.get("/public/api/product", product.list);
+routes.get("/public/api/product/:productId", product.select);
+
+routes.post("/public/api/transactions", ensureCustomerAuthenticated, transaction.create);
+routes.put("/public/api/transactions", ensureCustomerAuthenticated, transaction.returning);

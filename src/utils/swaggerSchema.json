@@ -901,6 +901,9 @@
                     "400": {
                         "description": "Unhandled error"
                     },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
                     "404": {
                         "description": "Not found"
                     },
@@ -973,6 +976,9 @@
                     "400": {
                         "description": "Unhandled error"
                     },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
                     "404": {
                         "description": "Not found"
                     },
@@ -1028,6 +1034,9 @@
                     },
                     "400": {
                         "description": "Unhandled error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
                     },
                     "404": {
                         "description": "Not found"
@@ -1409,6 +1418,9 @@
                     "400": {
                         "description": "Unhandled error"
                     },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
                     "404": {
                         "description": "Not found"
                     },
@@ -1460,6 +1472,9 @@
                     },
                     "400": {
                         "description": "Unhandled error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
                     },
                     "404": {
                         "description": "Not found"

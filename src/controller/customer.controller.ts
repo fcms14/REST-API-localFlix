@@ -1,152 +1,159 @@
 import { Request, Response } from "express";
 import log from "../utils/logger";
-import { selectUserService } from '../service/user.service';
-import { createCustomerService, deleteCustomerService, updateCustomerService, selectCustomerService, listCustomerService } from '../service/customer.service';
+import { user } from '../service/user.service';
+import { customer } from '../service/customer.service';
 
-export async function listCustomer(req: Request, res: Response) {
-    const name = req.query.name?.toString();
+export const customerController = (mock?:{}) => {
+    const userService = user();
+    const service = customer();
     
-    try {
-        const customers = await listCustomerService(name);
-
-        if (!customers || !customers.length) {
-
-            return res.status(404).send("Users not found");
-        }
-
-        return res.status(200).json({ customers });
-    } catch (e: any) {
-        log.error(e.message);
-
-        return res.status(400).send("Unhandled error");
-    }
-}
-
-export async function selectCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
-
-    if (!customerId) {
-
-        return res.status(406).send("Customer ID can't be empty");
-    }
-
-    try {
-        const customer = await selectCustomerService(customerId);
-        if (!customer) {
-
-            return res.status(404).send("Customer not found");
-        }
-
-        return res.status(200).json({ customer });
-    } catch (e: any) {
-        log.error(e.message);
+    const list = async (req: Request, res: Response) => {
+        const {query: customer} = req;
         
-        return res.status(400).send("Unhandled error");
-    }
-}
-
-export async function createCustomer(req: Request, res: Response) {
-    const name    = req.body.name?.toString();
-    const usersId = parseInt(req.body.usersId);
-
-    if (!name) {
-
-        return res.status(406).send("Name can't be empty");
-    }
-
-    if (!usersId) {
-
-        return res.status(406).send("User ID can't be empty");
-    }
-
-    try {
-        if (!await selectUserService(usersId)) {
-
-            return res.status(404).send("User not found");
+        try {
+            const customers = await service.list(customer);
+    
+            if (!customers || !customers.length) {
+    
+                return res.status(404).send("Users not found");
+            }
+    
+            return res.status(200).json({ customers });
+        } catch (e: any) {
+            log.error(e.message);
+    
+            return res.status(400).send("Unhandled error");
         }
-
-        const customer = await createCustomerService(name, usersId);
-
-        return res.status(201).json({ customer });
-    } catch (e: any) {
-        log.error(e.message);
-
-        return res.status(400).send("Unhandled error");
-    }
-}
-
-export async function updateCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
-    const usersId = parseInt(req.body.usersId);
-    const name = req.body.name?.toString();
-
-    if (!customerId) {
-
-        return res.status(406).send("Customer ID can't be empty");
-    }
-
-    if (!usersId) {
-
-        return res.status(406).send("User ID can't be empty");
-    }
-
-    if (!name) {
-
-        return res.status(406).send("Name can't be empty");
-    }
-
-    try {
-        if (!await selectUserService(usersId)) {
-
-            return res.status(404).send("User not found");
+    };
+    
+    const select = async (req: Request, res: Response) => {
+        const customerId = parseInt(req.params.customerId);
+    
+        if (!customerId) {
+    
+            return res.status(406).send("Customer ID can't be empty");
         }
-
-        if (!await selectCustomerService(customerId)) {
-
-            return res.status(404).send("Customer not found");
+    
+        try {
+            const customer = await service.select(customerId);
+            if (!customer) {
+    
+                return res.status(404).send("Customer not found");
+            }
+    
+            return res.status(200).json({ customer });
+        } catch (e: any) {
+            log.error(e.message);
+            
+            return res.status(400).send("Unhandled error");
         }
-
-        const customer = await updateCustomerService(customerId, name, usersId);
-
-        return res.status(200).json({ customer });
-    } catch (e: any) {
-        log.error(e.message);
-
-        return res.status(400).send("Unhandled error");
-    }
-}
-
-export async function deleteCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
-    const usersId = parseInt(req.body.usersId);
-
-    if (!customerId) {
-
-        return res.status(406).send("Customer ID can't be empty");
-    }
-
-    if (!usersId) {
-
-        return res.status(406).send("User ID can't be empty");
-    }
-
-    try {
-        if (!await selectUserService(usersId)) {
-
-            return res.status(404).send("User not found");
+    };
+    
+    const create = async (req: Request, res: Response) => {
+        const name    = req.body.name?.toString();
+        const usersId = parseInt(req.body.usersId);
+    
+        if (!name) {
+    
+            return res.status(406).send("Name can't be empty");
         }
-        
-        if (!await selectCustomerService(customerId)) {
-
-            return res.status(404).send("Customer not found");
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
         }
-
-        const customer = await deleteCustomerService(customerId, usersId);
-
-        return res.status(200).json({ customer });
-    } catch (e: any) {
-        log.error(e.message);
-
-        return res.status(400).send("Unhandled error");
-    }
+    
+        try {
+            if (!await userService.select(usersId)) {
+    
+                return res.status(404).send("User not found");
+            }
+    
+            const customer = await service.create(name, usersId);
+    
+            return res.status(201).json({ customer });
+        } catch (e: any) {
+            log.error(e.message);
+    
+            return res.status(400).send("Unhandled error");
+        }
+    };
+    
+    const update = async (req: Request, res: Response) => {
+        const customerId = parseInt(req.params.customerId);
+        const usersId = parseInt(req.body.usersId);
+        const name = req.body.name?.toString();
+    
+        if (!customerId) {
+    
+            return res.status(406).send("Customer ID can't be empty");
+        }
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
+        }
+    
+        if (!name) {
+    
+            return res.status(406).send("Name can't be empty");
+        }
+    
+        try {
+            if (!await userService.select(usersId)) {
+    
+                return res.status(404).send("User not found");
+            }
+    
+            if (!await service.select(customerId)) {
+    
+                return res.status(404).send("Customer not found");
+            }
+    
+            const customer = await service.update(customerId, name, usersId);
+    
+            return res.status(200).json({ customer });
+        } catch (e: any) {
+            log.error(e.message);
+    
+            return res.status(400).send("Unhandled error");
+        }
+    };
+    
+    const remove = async (req: Request, res: Response) => {
+        const customerId = parseInt(req.params.customerId);
+        const usersId = parseInt(req.body.usersId);
+    
+        if (!customerId) {
+    
+            return res.status(406).send("Customer ID can't be empty");
+        }
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
+        }
+    
+        try {
+            if (!await userService.select(usersId)) {
+    
+                return res.status(404).send("User not found");
+            }
+            
+            if (!await service.select(customerId)) {
+    
+                return res.status(404).send("Customer not found");
+            }
+    
+            const customer = await service.remove(customerId, usersId);
+    
+            return res.status(200).json({ customer });
+        } catch (e: any) {
+            log.error(e.message);
+    
+            return res.status(400).send("Unhandled error");
+        }
+    };
+    
+    return { list, select, create, update, remove };
 }

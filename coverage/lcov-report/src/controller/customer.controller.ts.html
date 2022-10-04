@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.42% </span>
+                <span class="strong">45.91% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>66/152</span>
+                <span class='fraction'>73/159</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>14/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>6/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.42% </span>
+                <span class="strong">45.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>66/152</span>
+                <span class='fraction'>73/159</span>
             </div>
         
             
@@ -215,7 +215,18 @@
 <a name='L150'></a><a href='#L150'>150</a>
 <a name='L151'></a><a href='#L151'>151</a>
 <a name='L152'></a><a href='#L152'>152</a>
-<a name='L153'></a><a href='#L153'>153</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -367,157 +378,167 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
 import log from "../utils/logger";
-import { selectUserService } from '../service/user.service';
-import { createCustomerService, deleteCustomerService, updateCustomerService, selectCustomerService, listCustomerService } from '../service/customer.service';
+import { user } from '../service/user.service';
+import { customer } from '../service/customer.service';
 &nbsp;
-export <span class="fstat-no" title="function not covered" >async function listCustomer(req: Request, res: Response) {</span>
-<span class="cstat-no" title="statement not covered" >    const name = req.query.name?.toString();</span>
+export const customerController = (mock?:{}) =&gt; {
+    const userService = user();
+    const service = customer();
+    
+    const list = <span class="fstat-no" title="function not covered" >async (req: Request, res: Response) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const {query: customer} = req;</span>
+<span class="cstat-no" title="statement not covered" >        </span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            const customers = await service.list(customer);</span>
 <span class="cstat-no" title="statement not covered" >    </span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        const customers = await listCustomerService(name);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        if (!customers || !customers.length) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Users not found");</span>
+<span class="cstat-no" title="statement not covered" >            if (!customers || !customers.length) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("Users not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ customers });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ customers });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;
-export async function selectCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
-&nbsp;
-    if (!customerId) {
-&nbsp;
-        return res.status(406).send("Customer ID can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        const customer = await selectCustomerService(customerId);</span>
-<span class="cstat-no" title="statement not covered" >        if (!customer) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Customer not found");</span>
+<span class="cstat-no" title="statement not covered" >    };</span>
+    
+    const select = async (req: Request, res: Response) =&gt; {
+        const customerId = parseInt(req.params.customerId);
+    
+        if (!customerId) {
+    
+            return res.status(406).send("Customer ID can't be empty");
+        }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            const customer = await service.select(customerId);</span>
+<span class="cstat-no" title="statement not covered" >            if (!customer) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("Customer not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ customer });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >            </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ customer });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-}
-&nbsp;
-export async function createCustomer(req: Request, res: Response) {
-    const name    = req.body.name?.toString();
-    const usersId = parseInt(req.body.usersId);
-&nbsp;
-    if (!name) {
-&nbsp;
-        return res.status(406).send("Name can't be empty");
-    }
-&nbsp;
-    if (!usersId) {
-&nbsp;
-        return res.status(406).send("User ID can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
+    };
+    
+    const create = async (req: Request, res: Response) =&gt; {
+        const name    = req.body.name?.toString();
+        const usersId = parseInt(req.body.usersId);
+    
+        if (!name) {
+    
+            return res.status(406).send("Name can't be empty");
+        }
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
+        }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            const customer = await service.create(name, usersId);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(201).json({ customer });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const customer = await createCustomerService(name, usersId);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(201).json({ customer });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-}
-&nbsp;
-export async function updateCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
-    const usersId = parseInt(req.body.usersId);
-    const name = req.body.name?.toString();
-&nbsp;
-    if (!customerId) {
-&nbsp;
-        return res.status(406).send("Customer ID can't be empty");
-    }
-&nbsp;
-    if (!usersId) {
-&nbsp;
-        return res.status(406).send("User ID can't be empty");
-    }
-&nbsp;
-    if (!name) {
-&nbsp;
-        return res.status(406).send("Name can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
+    };
+    
+    const update = async (req: Request, res: Response) =&gt; {
+        const customerId = parseInt(req.params.customerId);
+        const usersId = parseInt(req.body.usersId);
+        const name = req.body.name?.toString();
+    
+        if (!customerId) {
+    
+            return res.status(406).send("Customer ID can't be empty");
+        }
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
+        }
+    
+        if (!name) {
+    
+            return res.status(406).send("Name can't be empty");
+        }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            if (!await service.select(customerId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("Customer not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            const customer = await service.update(customerId, name, usersId);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ customer });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectCustomerService(customerId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Customer not found");</span>
+    };
+    
+    const remove = async (req: Request, res: Response) =&gt; {
+        const customerId = parseInt(req.params.customerId);
+        const usersId = parseInt(req.body.usersId);
+    
+        if (!customerId) {
+    
+            return res.status(406).send("Customer ID can't be empty");
+        }
+    
+        if (!usersId) {
+    
+            return res.status(406).send("User ID can't be empty");
+        }
+<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >    </span></span>
+<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >            if (!await userService.select(usersId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("User not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >            </span>
+<span class="cstat-no" title="statement not covered" >            if (!await service.select(customerId)) {</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >                return res.status(404).send("Customer not found");</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            const customer = await service.remove(customerId, usersId);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(200).json({ customer });</span>
+<span class="cstat-no" title="statement not covered" >        } catch (e: any) {</span>
+<span class="cstat-no" title="statement not covered" >            log.error(e.message);</span>
+<span class="cstat-no" title="statement not covered" >    </span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send("Unhandled error");</span>
 <span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const customer = await updateCustomerService(customerId, name, usersId);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ customer });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-}
-&nbsp;
-export async function deleteCustomer(req: Request, res: Response) {
-    const customerId = parseInt(req.params.customerId);
-    const usersId = parseInt(req.body.usersId);
-&nbsp;
-    if (!customerId) {
-&nbsp;
-        return res.status(406).send("Customer ID can't be empty");
-    }
-&nbsp;
-    if (!usersId) {
-&nbsp;
-        return res.status(406).send("User ID can't be empty");
-    }
-<span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectUserService(usersId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("User not found");</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >        if (!await selectCustomerService(customerId)) {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).send("Customer not found");</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        const customer = await deleteCustomerService(customerId, usersId);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ customer });</span>
-<span class="cstat-no" title="statement not covered" >    } catch (e: any) {</span>
-<span class="cstat-no" title="statement not covered" >        log.error(e.message);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send("Unhandled error");</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    };
+    
+    return { list, select, create, update, remove };
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -526,7 +547,7 @@ export async function deleteCustomer(req: Request, res: Response) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-03T16:28:45.357Z
+                at 2022-10-04T11:57:55.966Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
